@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="16x16">
+  <title>@yield('title')</title>
+  <link rel="icon" type="image/png" href="assets/images/AFTERSHINE_LOGOGRAM_WHITE.png" sizes="16x16">
   <!-- remix icon font css  -->
   <link rel="stylesheet" href="assets/css/remixicon.css">
   <!-- BootStrap css -->
@@ -45,9 +45,7 @@
 @include('admin.layout.header')
 
   <div class="dashboard-main-body">
-    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-        <!-- <h6 class="fw-semibold mb-0">Dashboard</h6> -->
-    </div>
+     @yield('content')
   </div>
 
 <footer class="d-footer">

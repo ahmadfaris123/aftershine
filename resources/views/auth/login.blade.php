@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="assets/images/AFTERSHINE_LOGOGRAM_WHITE.png" sizes="16x16">
     <!-- remix icon font css  -->
     <link rel="stylesheet" href="assets/css/remixicon.css">
     <!-- BootStrap css -->
@@ -47,7 +47,7 @@
     <section class="auth bg-base d-flex flex-wrap">
         <div class="auth-left d-lg-block d-none">
             <div class="d-flex align-items-center flex-column h-100 justify-content-center">
-                <img src="assets/images/auth/auth-img.png" alt="Image">
+                <img src="assets/images/logo-login.png" alt="Image">
             </div>
         </div>
         <div class="auth-right py-32 px-24 d-flex flex-column justify-content-center">

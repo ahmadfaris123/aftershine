@@ -21,8 +21,8 @@
           <div class="dropdown">
             <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
               data-bs-toggle="dropdown">
-              <img src="assets/images/AFTERSHINE_LOGOGRAM_WHITE.png" alt="image"
-                class="w-40-px h-40-px object-fit-cover rounded-circle">
+              <img src="{{ asset('assets/images/AFTERSHINE_LOGOGRAM_BLACK.png') }}" alt="image"
+                class="w-40-px h-40-px object-fit-cover rounded-circle light-logo">
             </button>
             <div class="dropdown-menu to-top dropdown-menu-sm">
               <ul class="to-top-list">

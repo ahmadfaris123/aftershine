@@ -61,7 +61,7 @@
     <!-- ==================== Scroll to Top End Here ==================== -->
 
     <!-- ========================= Banner Section Start =============================== -->
-    <section class="banner py-80 position-relative overflow-hidden">
+    <section class="banner py-80 position-relative overflow-hidden" style="background-color: #0046bf">
         <div class="container">
             <div class="row gy-5 align-items-center">
                 <div class="col-12">
@@ -85,7 +85,7 @@
     <!-- ========================= Banner SEction End =============================== -->
 
     <!-- ========================== Brand Section Start =========================== -->
-    <div class="brand wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
+    <div class="brand wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s" style="background-color: #0046bf">
         <div class="container container--lg">
             <div class="brand-box py-80 px-16 bg-main-25 border border-neutral-30 rounded-16">
                 <h5 class="mb-40 text-center text-neutral-500">Contact Us</h5>
@@ -109,18 +109,20 @@
     <!-- ========================== Brand Section End =========================== -->
 
     <!-- ============================= Features Section Start ============================== -->
-    <section class="features py-120 position-relative overflow-hidden">
+    <section class="features py-120 position-relative overflow-hidden" style="background-color: #0046bf">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape two animation-scalation visible-mobile-devices">
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-12">
                     <div class="testimonials__content">
                         <div class="section-heading style-left">
-                            <h2 class="mb-24 wow bounceIn">Whats is Aftershine</h2>
+                            <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">What is Aftershine</h2>
                         </div>
 
                         <div class="testimonials__slider">
                             <div class="testimonials-item">
-                                <p class="text-neutral-700" data-aos="fade-left" data-aos-duration="1200">Adalah band
+                                <p class="text-white" data-aos="fade-left" data-aos-duration="1200">Adalah band
                                     pop Jawa modern dengan karakter emosional, elegan, tanpa menghilangkan cita rasa
                                     jawa. Musiknya memadukan unsur pop, romansa, dan identitas lokal yang mudah diterima
                                     banyak kalangan</p>
@@ -137,7 +139,7 @@
     <!-- ============================= Features Section End ============================== -->
 
     <!-- ============================= Features Section Start ============================== -->
-    <section class="features py-120 position-relative overflow-hidden">
+    <section class="features py-120 position-relative overflow-hidden" style="background-color: #0046bf">
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-6">
@@ -151,12 +153,12 @@
                 <div class="col-lg-6">
                     <div class="testimonials__content">
                         <div class="section-heading style-left">
-                            <h2 class="mb-24 wow bounceIn">Main Logo Philosophy</h2>
+                            <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">Main Logo Philosophy</h2>
                         </div>
 
                         <div class="testimonials__slider">
                             <div class="testimonials-item">
-                                <p class="text-neutral-700" data-aos="fade-left" data-aos-duration="1200">Logo baru ini
+                                <p class="text-white" data-aos="fade-left" data-aos-duration="1200">Logo baru ini
                                     menggunakan font bergaya serif agar terkesan lebih santai & elegan, ditambah dengan
                                     adanya lambang matahari di atasnya melambangkan sumber cahaya dan energi</p>
                             </div>
@@ -172,14 +174,18 @@
     <!-- ============================= Features Section End ============================== -->
 
     <!-- =========================== CHoose Us Section Start ================================ -->
-    <section class="choose-us pt-120 position-relative z-1 mash-bg-main mash-bg-main-two">
+    <section class="choose-us pt-120 position-relative z-1 mash-bg-main mash-bg-main-two" style="background-color: #0046bf">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape four animation-scalation visible-mobile-devices">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape two animation-scalation visible-mobile-devices">
         <div class="container">
             <div class="row gy-4">
                 <div class="col-xl-6">
                     <div class="choose-us__content">
                         <div class="mb-40">
-                            <h2 class="mb-24  wow bounceIn">Logo Gram Philosophy.</h2>
-                            <p class="text-neutral-500 text-line-5  wow bounceInUp">Menggambarkan Siluet Matahari dengan
+                            <h2 class="mb-24  wow bounceIn" style="color: #ffb83c">Logogram Philosophy.</h2>
+                            <p class="text-white text-line-5  wow bounceInUp">Menggambarkan Siluet Matahari dengan
                                 huruf A di tengahnya yang memiliki Makna secara universal melambangkan sumber energi,
                                 pencerahan, dan harapan, dan setiap perjalanan besar selalu dimulai dari satu langkah
                                 kecil. Huruf A mengingatkan kita bahwa untuk mencapai Z (tujuan akhir), kita harus
@@ -205,18 +211,18 @@
     <!-- =========================== CHoose Us Section End ================================ -->
 
     <!-- ================================= testimonials Section Start ========================================= -->
-    <section class="testimonials py-120 position-relative z-1 bg-main-25">
+    <section class="testimonials py-120 position-relative z-1" style="background-color: #0046bf">
         <div class="container">
 
             <div class="section-heading text-center">
-                <h2 class="mb-24 wow bounceIn">The Personil</h2>
+                <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">The Personnel</h2>
             </div>
 
             <div class="tutor-slider">
                 @forelse($personils as $personil)
                     <div class="scale-hover-item bg-white rounded-16 p-12 h-100 border border-neutral-20" data-aos="fade-up"
                         data-aos-duration="200">
-                        <div class="course-item__thumb rounded-12 bg-main-25 overflow-hidden position-relative">
+                        <div class="course-item__thumb rounded-12 overflow-hidden position-relative">
                             <img src="{{ asset('storage/' . $personil->photo_path) }}" alt="{{ $personil->name }}"
                                 class="scale-hover-item__img rounded-12 cover-img transition-2">
                         </div>
@@ -272,11 +278,11 @@
 
             <div class="flex-center gap-16 mt-40">
                 <button type="button" id="tutor-prev"
-                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48">
+                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <button type="button" id="tutor-next"
-                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48">
+                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-right"></i>
                 </button>
             </div>
@@ -285,15 +291,15 @@
     <!-- ================================= testimonials Section End ========================================= -->
 
     <!-- ================================= Blog Section Start ========================================= -->
-    <section class="blog py-120 mash-bg-main mash-bg-main-two position-relative">
-        <img src="{{ asset('assets/landing_v2/images/shapes/shape2.png') }}" alt=""
-            class="shape two animation-scalation">
-        <img src="{{ asset('assets/landing_v2/images/shapes/shape6.png') }}" alt=""
-            class="shape four animation-scalation">
+    <section class="blog py-120 mash-bg-main mash-bg-main-two position-relative" style="background-color: #0046bf">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape two animation-scalation visible-mobile-devices">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape four animation-scalation visible-mobile-devices">
 
         <div class="container">
             <div class="section-heading text-center">
-                <h2 class="mb-24 wow bounceIn">Songs.</h2>
+                <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">Our Originals.</h2>
             </div>
             <div class="row gy-4">
                 @forelse($songs as $song)
@@ -316,8 +322,14 @@
                                         <div class="flex-align gap-8">
                                             <span class="text-neutral-500 text-2xl d-flex"><i
                                                     class="ph ph-calendar-dot"></i></span>
-                                            <span
-                                                class="text-neutral-500 text-lg">{{ $song->release_date ? \Carbon\Carbon::parse($song->release_date)->format('d M, y') : '-' }}</span>
+                                            <span class="text-neutral-500 text-lg">
+                                                {{ $song->release_date 
+                                                    ? \Carbon\Carbon::parse($song->release_date)
+                                                        ->locale('id')
+                                                        ->translatedFormat('d F Y') 
+                                                    : '-' 
+                                                }}
+                                            </span>
                                         </div>
                                     </div>
                                     <p class="text-neutral-500 text-line-5">{{ $song->description }}</p>
@@ -344,10 +356,10 @@
     <!-- ================================= Blog Section End ========================================= -->
 
     <!-- ================================= testimonials Section Start ========================================= -->
-    <section class="testimonials py-120 position-relative z-1 bg-main-25">
+    <section class="testimonials py-120 position-relative z-1" style="background-color: #0046bf">
         <div class="container">
             <div class="section-heading text-center">
-                <h2 class="mb-24 wow bounceIn">Events</h2>
+                <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">Events</h2>
             </div>
 
             <div class="tab-content" id="pills-tabContent">
@@ -372,8 +384,12 @@
                                                 <div class="flex-align gap-8">
                                                     <span class="text-neutral-500 text-2xl d-flex"><i
                                                             class="ph ph-calendar-dot"></i></span>
-                                                    <span
-                                                        class="text-neutral-500 text-lg">{{ \Carbon\Carbon::parse($event->event_date)->format('d M, Y') }}</span>
+                                                    <span class="text-neutral-500 text-lg">
+                                                        {{ \Carbon\Carbon::parse($event->event_date)
+                                                                ->locale('id')
+                                                                ->translatedFormat('d F Y') 
+                                                        }}
+                                                    </span>
                                                 </div>
                                                 <div class="flex-align gap-8">
                                                     <p class="text-neutral-500 text-line-5">{{ $event->description }}</p>
@@ -396,10 +412,10 @@
     <!-- ================================= testimonials Section Start ========================================= -->
 
     <!-- ================================= Blog Section Start ========================================= -->
-    <section class="blog py-120 mash-bg-main mash-bg-main-two position-relative">
+    <section class="blog py-120 mash-bg-main mash-bg-main-two position-relative" style="background-color: #0046bf">
         <div class="container">
             <div class="section-heading text-center">
-                <h2 class="mb-24 wow bounceIn">Awards</h2>
+                <h2 class="mb-24 wow bounceIn" style="color: #ffb83c">Awards</h2>
             </div>
 
             <div class="row gy-4">
@@ -421,8 +437,12 @@
                                         <div class="flex-align gap-8">
                                             <span class="text-neutral-500 text-2xl d-flex"><i
                                                     class="ph ph-calendar-dot"></i></span>
-                                            <span
-                                                class="text-neutral-500 text-lg">{{ $award->award_date ? \Carbon\Carbon::parse($award->award_date)->format('d M, Y') : '-' }}</span>
+                                            <span class="text-neutral-500 text-lg">
+                                                        {{ \Carbon\Carbon::parse($award->award_date)
+                                                                ->locale('id')
+                                                                ->translatedFormat('d F Y') 
+                                                        }}
+                                                    </span>
                                         </div>
                                     </div>
                                     <div class="flex-between gap-8 flex-wrap mb-16">
@@ -444,11 +464,11 @@
     </section>
 
     <!-- ==================== Footer Start Here ==================== -->
-    <footer class="footer bg-main-25 position-relative z-1">
-        <img src="{{ asset('assets/landing_v2/images/shapes/shape2.png') }}" alt=""
-            class="shape five animation-scalation">
-        <img src="{{ asset('assets/landing_v2/images/shapes/shape6.png') }}" alt=""
-            class="shape one animation-scalation">
+    <footer class="footer position-relative z-1" style="background-color: #0046bf">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape four animation-scalation visible-mobile-devices">
+        <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
+            class="shape two animation-scalation visible-mobile-devices">
 
         <div class="py-120 ">
             <div class="container container-two">
@@ -456,8 +476,10 @@
                     <div class="col" data-aos="fade-up" data-aos-duration="300">
                         <div class="footer-item">
                             <div class="footer-item__logo">
+                                <br>
+                                <br>
                                 <a href="#">
-                                    <img src="{{ asset('assets/images/logo.png') }}" alt="Logo">
+                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="Logo">
                                 </a>
                             </div>
                             <!-- <p class="my-32">EduAll exceeded all my expectations! The instructors were not only experts</p> -->
@@ -465,15 +487,15 @@
                     </div>
                     <div class="col" data-aos="fade-up" data-aos-duration="800">
                         <div class="footer-item">
-                            <h4 class="footer-item__title mb-32">Contact Us</h4>
+                            <h4 class="footer-item__title mb-32" style="color: #ffb83c">Contact Us</h4>
                             @if(isset($settings->phone_number))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-whatsapp-logo"></i></span>
+                                            class="ph ph-whatsapp-logo text-white"></i></span>
                                     <div class="">
                                         <a href="{{ LandingController::getWhatsAppLink($settings->phone_number) }}"
                                             target="_blank"
-                                            class="text-neutral-500 d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -481,10 +503,10 @@
                             @if(isset($settings->email))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-envelope-open"></i></span>
+                                            class="ph ph-envelope-open text-white"></i></span>
                                     <div class="">
                                         <a href="mailto:{{ $settings->email }}"
-                                            class="text-neutral-500 d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -494,24 +516,24 @@
                     @if(isset($settings->facebook_url) || isset($settings->twitter_url))
                         <div class="col" data-aos="fade-up" data-aos-duration="800">
                             <div class="footer-item">
-                                <h4 class="footer-item__title mb-32"></h4>
+                                <h4 class="footer-item__title mb-32"><br></h4>
                                 @if(isset($settings->facebook_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-facebook-logo"></i></span>
+                                                class="ph-bold ph-facebook-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->facebook_url }}" target="_blank"
-                                                class="text-neutral-500 d-block hover-text-main-600 mb-4">Facebook</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Facebook</a>
                                         </div>
                                     </div>
                                 @endif
 
                                 @if(isset($settings->twitter_url))
                                     <div class="flex-align gap-20 mb-24">
-                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo"></i></span>
+                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->twitter_url }}" target="_blank"
-                                                class="text-neutral-500 d-block hover-text-main-600 mb-4">X (Twitter)</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">X (Twitter)</a>
                                         </div>
                                     </div>
                                 @endif
@@ -522,14 +544,14 @@
                     @if(isset($settings->instagram_url) || isset($settings->tiktok_url))
                         <div class="col" data-aos="fade-up" data-aos-duration="800">
                             <div class="footer-item">
-                                <h4 class="footer-item__title mb-32"></h4>
+                                <h4 class="footer-item__title mb-32"><br></h4>
                                 @if(isset($settings->instagram_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-instagram-logo"></i></span>
+                                                class="ph-bold ph-instagram-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->instagram_url }}" target="_blank"
-                                                class="text-neutral-500 d-block hover-text-main-600 mb-4">Instagram</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Instagram</a>
                                         </div>
                                     </div>
                                 @endif
@@ -537,10 +559,10 @@
                                 @if(isset($settings->tiktok_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-tiktok-logo"></i></span>
+                                                class="ph-bold ph-tiktok-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->tiktok_url }}" target="_blank"
-                                                class="text-neutral-500 d-block hover-text-main-600 mb-4">TikTok</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">TikTok</a>
                                         </div>
                                     </div>
                                 @endif
@@ -550,12 +572,12 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container" style="background-color: #0046bf">
             <!-- bottom Footer -->
-            <div class="bottom-footer bg-main-25 border-top border-dashed border-main-100 border-0 py-32">
+            <div class="bottom-footer border-top border-dashed border-main-100 border-0 py-32">
                 <div class="container container-two">
                     <div class="bottom-footer__inner flex-between gap-3 flex-wrap">
-                        <p class="bottom-footer__text"> Copyright &copy; {{ date('Y') }} <span
+                        <p class="bottom-footer__text text-white"> Copyright &copy; {{ date('Y') }} <span
                                 class="fw-semibold">{{ $settings->brand_name ?? 'Aftershine' }}</span> All Rights
                             Reserved.</p>
                     </div>

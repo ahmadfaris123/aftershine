@@ -12,11 +12,11 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LandingController;
 
-Route::get('/', function () {
+Route::get('/doc', function () {
     return view('landing.index');
 });
 
-Route::get('/landing_v2', [LandingController::class, 'index'])->name('landing.v2');
+Route::get('/', [LandingController::class, 'index'])->name('landing.v2');
 
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

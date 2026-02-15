@@ -13090,3 +13090,14 @@ table.dataTable.display > tbody > tr > * {
 
 /* ================================ RTL Css End ============================== */
 /*# sourceMappingURL=main.css.map */
+.visible-mobile-devices {
+  display: block;
+  visibility: visible;
+}
+
+@media only screen and (max-width: 995px) {
+  .visible-mobile-devices {
+    display: none;
+    visibility: hidden;
+  }
+}

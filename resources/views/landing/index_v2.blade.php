@@ -85,7 +85,7 @@
     <!-- ========================= Banner SEction End =============================== -->
 
     <!-- ========================== Brand Section Start =========================== -->
-    <div class="brand wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s" style="background-color: #0046bf">
+    <div class="brand" style="background-color: #0046bf">
         <div class="container container--lg">
             <div class="brand-box py-80 px-16 bg-main-25 border border-neutral-30 rounded-16">
                 <h5 class="mb-40 text-center text-neutral-500">Contact Us</h5>

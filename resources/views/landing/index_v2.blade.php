@@ -146,7 +146,7 @@
                     <div class="testimonials__thumbs-slider pe-lg-5 me-xxl-5">
                         <div class="testimonials__thumbs wow bounceIn" data-tilt data-tilt-max="15"
                             data-tilt-speed="500" data-tilt-perspective="5000" data-tilt-full-page-listening>
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                            <img src="{{ asset('assets/images/logo-light.png') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                     <div class="choose-us__thumbs position-relative">
                         <div class="text-end" data-aos="zoom-out">
                             <div class="d-sm-inline-block d-block position-relative">
-                                <img src="{{ asset('assets/images/logo-gram.png') }}" alt=""
+                                <img src="{{ asset('assets/landing_v2/images/logo-gram.png') }}" alt=""
                                     class="choose-us__img rounded-12" data-tilt data-tilt-max="16" data-tilt-speed="500"
                                     data-tilt-perspective="5000" data-tilt-full-page-listening>
                             </div>

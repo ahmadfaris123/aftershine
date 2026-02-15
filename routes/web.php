@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LandingController;
 
 Route::get('/doc', function () {
-    return view('landing.index');
+    return view('landing.index_doc');
 });
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.v2');

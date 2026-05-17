@@ -33,8 +33,6 @@ class BackgroundController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120', // max 5MB
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
-            'display_order' => 'nullable|integer'
         ], [
             'image.required' => 'Gambar background wajib diupload',
             'image.image' => 'File harus berupa gambar',
@@ -53,20 +51,11 @@ class BackgroundController extends Controller
                 // Simpan ke storage/app/public/backgrounds
                 $path = $image->storeAs('backgrounds', $fileName, 'public');
 
-                $isActive = $validated['is_active'] ?? true;
-
-                // Jika background baru akan diaktifkan, nonaktifkan semua background lain
-                if ($isActive) {
-                    \App\Models\Background::where('is_active', true)->update(['is_active' => false]);
-                }
-
                 // Simpan data ke database
                 \App\Models\Background::create([
                     'title' => $validated['title'] ?? 'Background Image',
                     'image_path' => $path,
                     'description' => $validated['description'] ?? null,
-                    'is_active' => $isActive,
-                    'display_order' => $validated['display_order'] ?? 0
                 ]);
 
                 return redirect()->back()->with('success', 'Background berhasil diupload');
@@ -90,9 +79,7 @@ class BackgroundController extends Controller
         $validated = $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'is_active' => 'boolean',
-            'display_order' => 'nullable|integer'
+            'description' => 'nullable|string'
         ], [
             'image.image' => 'File harus berupa gambar',
             'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
@@ -113,13 +100,6 @@ class BackgroundController extends Controller
                 $path = $image->storeAs('backgrounds', $fileName, 'public');
 
                 $validated['image_path'] = $path;
-            }
-
-            // Jika background akan diaktifkan, nonaktifkan semua background lain
-            if (isset($validated['is_active']) && $validated['is_active']) {
-                \App\Models\Background::where('id', '!=', $id)
-                    ->where('is_active', true)
-                    ->update(['is_active' => false]);
             }
 
             // Update data

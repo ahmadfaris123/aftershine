@@ -46,10 +46,14 @@
     <div class="row gy-4">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-24">
-                    <h6 class="text-md text-primary-light mb-16">Tambah Award Baru</h6>
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent border-0 p-24" data-bs-toggle="collapse" data-bs-target="#collapseUploadForm" aria-expanded="false" aria-controls="collapseUploadForm" style="cursor: pointer;">
+                    <h6 class="text-md text-primary-light mb-0">Tambah Award Baru</h6>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform" id="uploadFormIcon"></iconify-icon>
+                </div>
+                <div class="collapse" id="collapseUploadForm">
+                    <div class="card-body p-24 pt-0">
 
-                    <form action="{{ route('award.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('award.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             {{-- Name --}}
@@ -102,7 +106,7 @@
                             </div>
 
                             {{-- Description --}}
-                            <div class="col-md-8 mb-20">
+                            <div class="col-md-12 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Keterangan <span class="text-muted">(Opsional)</span>
                                 </label>
@@ -111,13 +115,13 @@
                             </div>
 
                             {{-- Display Order --}}
-                            <div class="col-md-4 mb-20">
+                            <!-- <div class="col-md-4 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Urutan Tampil
                                 </label>
                                 <input type="number" name="display_order" class="form-control radius-8" placeholder="0"
                                     value="0" min="0">
-                            </div>
+                            </div> -->
 
                             {{-- Status --}}
                             <div class="col-12 mb-20">
@@ -142,7 +146,8 @@
                                 Tambah Award
                             </button>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,7 +166,7 @@
                                         <th scope="col">Gambar</th>
                                         <th scope="col">Informasi Award</th>
                                         <th scope="col">Tanggal</th>
-                                        <th scope="col">Urutan</th>
+                                        <!-- <th scope="col">Urutan</th> -->
                                         <th scope="col">Status</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
@@ -189,7 +194,7 @@
                                             <td>
                                                 <span class="text-sm">{{ $award->formatted_award_date }}</span>
                                             </td>
-                                            <td>{{ $award->display_order }}</td>
+                                            <!-- <td>{{ $award->display_order }}</td> -->
                                             <td>
                                                 @if($award->is_active)
                                                     <span
@@ -277,16 +282,16 @@
                                                                     <small class="text-muted">Kosongkan jika tidak ingin mengubah
                                                                         gambar. Rasio 16:9 recommended</small>
                                                                 </div>
-                                                                <div class="col-md-8 mb-3">
+                                                                <div class="col-md-12 mb-3">
                                                                     <label class="form-label">Keterangan</label>
                                                                     <textarea name="description" class="form-control"
                                                                         rows="3">{{ $award->description }}</textarea>
                                                                 </div>
-                                                                <div class="col-md-4 mb-3">
+                                                                <!-- <div class="col-md-4 mb-3">
                                                                     <label class="form-label">Urutan Tampil</label>
                                                                     <input type="number" name="display_order" class="form-control"
                                                                         value="{{ $award->display_order }}" min="0">
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-12 mb-3">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="checkbox"
@@ -363,5 +368,18 @@
                 bsAlert.close();
             });
         }, 5000);
+
+        // Form collapse icon handler
+        const collapseUploadForm = document.getElementById('collapseUploadForm');
+        const uploadFormIcon = document.getElementById('uploadFormIcon');
+        
+        if (collapseUploadForm && uploadFormIcon) {
+            collapseUploadForm.addEventListener('show.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-up');
+            });
+            collapseUploadForm.addEventListener('hide.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-down');
+            });
+        }
     </script>
 @endpush

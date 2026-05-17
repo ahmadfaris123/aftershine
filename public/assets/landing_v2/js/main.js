@@ -1051,7 +1051,46 @@ if ($('ul').length) {
         }
       },
     ]
-  });  
+  });
+  $('.award-slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#award-next',
+    prevArrow: '#award-prev',
+    responsive: [
+      {
+        breakpoint: 1299,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });
   // ========================= Brand Slider Js End ===================
 
   // ========================= Increment & Decrement Js Start ===================

@@ -33,51 +33,51 @@ class SongController extends Controller
             'artist_name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120', // max 5MB
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120', // max 5MB
             'description' => 'nullable|string',
             'youtube_url' => 'required|url|max:500',
-            'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            // 'display_order' => 'nullable|integer',
+            // 'is_active' => 'boolean'
         ], [
             'artist_name.required' => 'Nama penyanyi wajib diisi',
             'title.required' => 'Judul lagu wajib diisi',
             'release_date.required' => 'Tanggal rilis wajib diisi',
             'release_date.date' => 'Format tanggal tidak valid',
-            'thumbnail.required' => 'Thumbnail wajib diupload',
-            'thumbnail.image' => 'File harus berupa gambar',
-            'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
-            'thumbnail.max' => 'Ukuran gambar maksimal 5MB',
+            // 'thumbnail.required' => 'Thumbnail wajib diupload',
+            // 'thumbnail.image' => 'File harus berupa gambar',
+            // 'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
+            // 'thumbnail.max' => 'Ukuran gambar maksimal 5MB',
             'youtube_url.required' => 'Link YouTube wajib diisi',
             'youtube_url.url' => 'Format URL YouTube tidak valid'
         ]);
 
         try {
             // Upload dan simpan thumbnail
-            if ($request->hasFile('thumbnail')) {
-                $thumbnail = $request->file('thumbnail');
+            // if ($request->hasFile('thumbnail')) {
+            //     $thumbnail = $request->file('thumbnail');
 
-                // Generate nama file unik
-                $fileName = 'song_' . time() . '_' . Str::random(10) . '.' . $thumbnail->getClientOriginalExtension();
+            //     // Generate nama file unik
+            //     $fileName = 'song_' . time() . '_' . Str::random(10) . '.' . $thumbnail->getClientOriginalExtension();
 
-                // Simpan ke storage/app/public/songs
-                $path = $thumbnail->storeAs('songs', $fileName, 'public');
+            //     // Simpan ke storage/app/public/songs
+            //     $path = $thumbnail->storeAs('songs', $fileName, 'public');
 
-                // Simpan data ke database
-                Song::create([
-                    'artist_name' => $validated['artist_name'],
-                    'title' => $validated['title'],
-                    'release_date' => $validated['release_date'],
-                    'thumbnail_path' => $path,
-                    'description' => $validated['description'] ?? null,
-                    'youtube_url' => $validated['youtube_url'],
-                    'display_order' => $validated['display_order'] ?? 0,
-                    'is_active' => $validated['is_active'] ?? true
-                ]);
+            //     // Simpan data ke database
+            // }
+            Song::create([
+                'artist_name' => $validated['artist_name'],
+                'title' => $validated['title'],
+                'release_date' => $validated['release_date'],
+                // 'thumbnail_path' => $path,
+                'description' => $validated['description'] ?? null,
+                'youtube_url' => $validated['youtube_url'],
+                'display_order' => $validated['display_order'] ?? 0,
+                'is_active' => $validated['is_active'] ?? true
+            ]);
 
-                return redirect()->back()->with('success', 'Lagu berhasil ditambahkan');
-            }
+            return redirect()->back()->with('success', 'Lagu berhasil ditambahkan');
 
-            return redirect()->back()->with('error', 'Gagal mengupload thumbnail');
+            // return redirect()->back()->with('error', 'Gagal mengupload thumbnail');
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -96,38 +96,38 @@ class SongController extends Controller
             'artist_name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'release_date' => 'required|date',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            // 'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
             'youtube_url' => 'required|url|max:500',
-            'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            // 'display_order' => 'nullable|integer',
+            // 'is_active' => 'boolean'
         ], [
             'artist_name.required' => 'Nama penyanyi wajib diisi',
             'title.required' => 'Judul lagu wajib diisi',
             'release_date.required' => 'Tanggal rilis wajib diisi',
             'release_date.date' => 'Format tanggal tidak valid',
-            'thumbnail.image' => 'File harus berupa gambar',
-            'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
-            'thumbnail.max' => 'Ukuran gambar maksimal 5MB',
+            // 'thumbnail.image' => 'File harus berupa gambar',
+            // 'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
+            // 'thumbnail.max' => 'Ukuran gambar maksimal 5MB',
             'youtube_url.required' => 'Link YouTube wajib diisi',
             'youtube_url.url' => 'Format URL YouTube tidak valid'
         ]);
 
         try {
             // Jika ada thumbnail baru, upload dan hapus yang lama
-            if ($request->hasFile('thumbnail')) {
-                // Hapus thumbnail lama
-                if ($song->thumbnail_path && Storage::disk('public')->exists($song->thumbnail_path)) {
-                    Storage::disk('public')->delete($song->thumbnail_path);
-                }
+            // if ($request->hasFile('thumbnail')) {
+            //     // Hapus thumbnail lama
+            //     if ($song->thumbnail_path && Storage::disk('public')->exists($song->thumbnail_path)) {
+            //         Storage::disk('public')->delete($song->thumbnail_path);
+            //     }
 
-                // Upload thumbnail baru
-                $thumbnail = $request->file('thumbnail');
-                $fileName = 'song_' . time() . '_' . Str::random(10) . '.' . $thumbnail->getClientOriginalExtension();
-                $path = $thumbnail->storeAs('songs', $fileName, 'public');
+            //     // Upload thumbnail baru
+            //     $thumbnail = $request->file('thumbnail');
+            //     $fileName = 'song_' . time() . '_' . Str::random(10) . '.' . $thumbnail->getClientOriginalExtension();
+            //     $path = $thumbnail->storeAs('songs', $fileName, 'public');
 
-                $validated['thumbnail_path'] = $path;
-            }
+            //     $validated['thumbnail_path'] = $path;
+            // }
 
             // Update data
             $song->update($validated);

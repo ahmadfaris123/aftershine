@@ -31,42 +31,41 @@ class EventController extends Controller
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120', // max 5MB
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
-            'display_order' => 'nullable|integer',
+            // 'display_order' => 'nullable|integer',
             'is_active' => 'boolean'
         ], [
             'name.required' => 'Nama event wajib diisi',
-            'image.required' => 'Gambar event wajib diupload',
-            'image.image' => 'File harus berupa gambar',
-            'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
-            'image.max' => 'Ukuran gambar maksimal 5MB'
+            // 'image.image' => 'File harus berupa gambar',
+            // 'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
+            // 'image.max' => 'Ukuran gambar maksimal 5MB'
         ]);
 
         try {
+            $path = null;
+            
             // Upload dan simpan gambar
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
+            // if ($request->hasFile('image')) {
+            //     $image = $request->file('image');
 
-                // Generate nama file unik
-                $fileName = 'event_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            //     // Generate nama file unik
+            //     $fileName = 'event_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
 
-                // Simpan ke storage/app/public/events
-                $path = $image->storeAs('events', $fileName, 'public');
+            //     // Simpan ke storage/app/public/events
+            //     $path = $image->storeAs('events', $fileName, 'public');
+            // }
 
-                // Simpan data ke database
-                Event::create([
-                    'name' => $validated['name'],
-                    'image_path' => $path,
-                    'description' => $validated['description'] ?? null,
-                    'display_order' => $validated['display_order'] ?? 0,
-                    'is_active' => $validated['is_active'] ?? true
-                ]);
+            // Simpan data ke database
+            Event::create([
+                'name' => $validated['name'],
+                // 'image_path' => $path,
+                'description' => $validated['description'] ?? null,
+                // 'display_order' => $validated['display_order'] ?? 0,
+                'is_active' => $validated['is_active'] ?? true
+            ]);
 
-                return redirect()->back()->with('success', 'Event berhasil ditambahkan');
-            }
-
-            return redirect()->back()->with('error', 'Gagal mengupload gambar');
+            return redirect()->back()->with('success', 'Event berhasil ditambahkan');
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -83,32 +82,32 @@ class EventController extends Controller
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
-            'display_order' => 'nullable|integer',
+            // 'display_order' => 'nullable|integer',
             'is_active' => 'boolean'
         ], [
             'name.required' => 'Nama event wajib diisi',
-            'image.image' => 'File harus berupa gambar',
-            'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
-            'image.max' => 'Ukuran gambar maksimal 5MB'
+            // 'image.image' => 'File harus berupa gambar',
+            // 'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
+            // 'image.max' => 'Ukuran gambar maksimal 5MB'
         ]);
 
         try {
             // Jika ada gambar baru, upload dan hapus yang lama
-            if ($request->hasFile('image')) {
-                // Hapus gambar lama
-                if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
-                    Storage::disk('public')->delete($event->image_path);
-                }
+            // if ($request->hasFile('image')) {
+            //     // Hapus gambar lama
+            //     if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
+            //         Storage::disk('public')->delete($event->image_path);
+            //     }
 
-                // Upload gambar baru
-                $image = $request->file('image');
-                $fileName = 'event_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('events', $fileName, 'public');
+            //     // Upload gambar baru
+            //     $image = $request->file('image');
+            //     $fileName = 'event_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            //     $path = $image->storeAs('events', $fileName, 'public');
 
-                $validated['image_path'] = $path;
-            }
+            //     $validated['image_path'] = $path;
+            // }
 
             // Update data
             $event->update($validated);
@@ -129,9 +128,9 @@ class EventController extends Controller
             $event = Event::findOrFail($id);
 
             // Hapus file gambar
-            if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
-                Storage::disk('public')->delete($event->image_path);
-            }
+            // if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
+            //     Storage::disk('public')->delete($event->image_path);
+            // }
 
             // Hapus dari database
             $event->delete();

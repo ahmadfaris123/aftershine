@@ -45,10 +45,14 @@
     <div class="row gy-4">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-24">
-                    <h6 class="text-md text-primary-light mb-16">Tambah Personil Baru</h6>
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent border-0 p-24" data-bs-toggle="collapse" data-bs-target="#collapseUploadForm" aria-expanded="false" aria-controls="collapseUploadForm" style="cursor: pointer;">
+                    <h6 class="text-md text-primary-light mb-0">Tambah Personil Baru</h6>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform" id="uploadFormIcon"></iconify-icon>
+                </div>
+                <div class="collapse" id="collapseUploadForm">
+                    <div class="card-body p-24 pt-0">
                     
-                    <form action="{{ route('personil.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('personil.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             {{-- Nama --}}
@@ -152,7 +156,7 @@
                             </div>
                             
                             {{-- Display Order --}}
-                            <div class="col-md-6 mb-20">
+                            <!-- <div class="col-md-6 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Urutan Tampil
                                 </label>
@@ -169,7 +173,7 @@
                                         Aktifkan personil
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
                         <div class="d-flex align-items-center justify-content-center gap-3 mt-3">
@@ -183,7 +187,8 @@
                                 Tambah Personil
                             </button>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,7 +208,7 @@
                                     <th scope="col">Nama</th>
                                     <th scope="col">Posisi</th>
                                     <th scope="col">Social Media</th>
-                                    <th scope="col">Urutan</th>
+                                    <!-- <th scope="col">Urutan</th> -->
                                     <th scope="col">Status</th>
                                     <th scope="col" class="text-center">Aksi</th>
                                 </tr>
@@ -249,7 +254,7 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{ $personil->display_order }}</td>
+                                    <!-- <td>{{ $personil->display_order }}</td> -->
                                     <td>
                                         @if($personil->is_active)
                                             <span class="badge text-sm fw-semibold text-success-600 bg-success-100 px-20 py-9 radius-4">
@@ -264,13 +269,13 @@
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center gap-2">
                                             {{-- Toggle Active --}}
-                                            <form action="{{ route('personil.toggle', $personil->id) }}" method="POST" class="d-inline">
+                                            <!-- <form action="{{ route('personil.toggle', $personil->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-outline-{{ $personil->is_active ? 'warning' : 'success' }}" 
                                                         title="{{ $personil->is_active ? 'Nonaktifkan' : 'Aktifkan' }}">
                                                     <iconify-icon icon="{{ $personil->is_active ? 'mdi:eye-off' : 'mdi:eye' }}"></iconify-icon>
                                                 </button>
-                                            </form>
+                                            </form> -->
                                             
                                             {{-- Edit Button --}}
                                             <button type="button" class="btn btn-sm btn-outline-primary" 
@@ -358,7 +363,7 @@
                                                             <input type="url" name="tiktok_url" class="form-control" value="{{ $personil->tiktok_url }}">
                                                         </div>
                                                         
-                                                        <div class="col-md-6 mb-3">
+                                                        <!-- <div class="col-md-6 mb-3">
                                                             <label class="form-label">Urutan Tampil</label>
                                                             <input type="number" name="display_order" class="form-control" value="{{ $personil->display_order }}" min="0">
                                                         </div>
@@ -370,7 +375,7 @@
                                                                     Aktif
                                                                 </label>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -431,5 +436,18 @@
                 bsAlert.close();
             });
         }, 5000);
+
+        // Form collapse icon handler
+        const collapseUploadForm = document.getElementById('collapseUploadForm');
+        const uploadFormIcon = document.getElementById('uploadFormIcon');
+        
+        if (collapseUploadForm && uploadFormIcon) {
+            collapseUploadForm.addEventListener('show.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-up');
+            });
+            collapseUploadForm.addEventListener('hide.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-down');
+            });
+        }
     </script>
 @endpush

@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->string('artist_name');
             $table->string('title');
             $table->date('release_date');
-            $table->string('thumbnail_path');
+            $table->string('thumbnail_path')->nullable();
             $table->text('description')->nullable();
-            $table->string('youtube_url');
+            $table->string('youtube_url')->nullable();
             $table->integer('display_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

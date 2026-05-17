@@ -15,7 +15,7 @@
       <li>
         <a href="{{ route('background.index') }}">
           <iconify-icon icon="majesticons:puzzle-line" class="menu-icon"></iconify-icon>
-          <span>Background</span>
+          <span>Carousel</span>
         </a>
       </li>
       <li>

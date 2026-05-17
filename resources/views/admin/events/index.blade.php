@@ -46,14 +46,18 @@
     <div class="row gy-4">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-24">
-                    <h6 class="text-md text-primary-light mb-16">Tambah Event Baru</h6>
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent border-0 p-24" data-bs-toggle="collapse" data-bs-target="#collapseUploadForm" aria-expanded="false" aria-controls="collapseUploadForm" style="cursor: pointer;">
+                    <h6 class="text-md text-primary-light mb-0">Tambah Event Baru</h6>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform" id="uploadFormIcon"></iconify-icon>
+                </div>
+                <div class="collapse" id="collapseUploadForm">
+                    <div class="card-body p-24 pt-0">
 
-                    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             {{-- Name --}}
-                            <div class="col-md-6 mb-20">
+                            <div class="col-md-12 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Nama Event <span class="text-danger">*</span>
                                 </label>
@@ -62,16 +66,16 @@
                             </div>
 
                             {{-- Display Order --}}
-                            <div class="col-md-6 mb-20">
+                            <!-- <div class="col-md-6 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Urutan Tampil
                                 </label>
                                 <input type="number" name="display_order" class="form-control radius-8" placeholder="0"
                                     value="0" min="0">
-                            </div>
+                            </div> -->
 
                             {{-- Image Upload --}}
-                            <div class="col-12 mb-20">
+                            <!-- <div class="col-12 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Gambar Event (Rasio 16:9) <span class="text-danger">*</span>
                                 </label>
@@ -100,7 +104,7 @@
                                 </div>
                                 <small class="text-muted">Format: JPEG, PNG, JPG, WEBP. Maksimal 5MB. Rasio 16:9 (contoh:
                                     1920x1080)</small>
-                            </div>
+                            </div> -->
 
                             {{-- Description --}}
                             <div class="col-12 mb-20">
@@ -134,7 +138,8 @@
                                 Tambah Event
                             </button>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,155 +151,143 @@
                     <div class="card-body p-24">
                         <h6 class="text-md text-primary-light mb-16">Daftar Event</h6>
 
-                        <div class="row g-3">
-                            @foreach($events as $event)
-                                <div class="col-md-6 col-xl-4">
-                                    <div class="card border h-100">
-                                        <div class="card-body p-0">
-                                            {{-- Event Image --}}
-                                            <div class="position-relative">
-                                                <img src="{{ asset('storage/' . $event->image_path) }}" alt="{{ $event->name }}"
-                                                    class="w-100 object-fit-cover radius-top-8"
-                                                    style="height: 200px; aspect-ratio: 16/9;">
-
-                                                {{-- Status Badge --}}
-                                                <div class="position-absolute top-0 end-0 m-2">
-                                                    @if($event->is_active)
-                                                        <span class="badge bg-success px-12 py-6 radius-4">
-                                                            <iconify-icon icon="mdi:check-circle" class="me-1"></iconify-icon>
-                                                            Aktif
-                                                        </span>
-                                                    @else
-                                                        <span class="badge bg-danger px-12 py-6 radius-4">
-                                                            <iconify-icon icon="mdi:close-circle" class="me-1"></iconify-icon>
-                                                            Nonaktif
-                                                        </span>
-                                                    @endif
-                                                </div>
-
-                                                {{-- Display Order Badge --}}
-                                                <div class="position-absolute top-0 start-0 m-2">
-                                                    <span class="badge bg-dark px-12 py-6 radius-4">
-                                                        #{{ $event->display_order }}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            {{-- Event Info --}}
-                                            <div class="p-16">
-                                                <h6 class="text-primary-600 mb-8">{{ $event->name }}</h6>
+                        <div class="table-responsive">
+                            <table class="table bordered-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nama Event</th>
+                                        <th scope="col">Keterangan</th>
+                                        <!-- <th scope="col">Urutan</th> -->
+                                        <th scope="col">Status</th>
+                                        <th scope="col" class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($events as $event)
+                                        <tr>
+                                            <td class="fw-semibold text-primary-600">{{ $event->name }}</td>
+                                            <td>
                                                 @if($event->description)
-                                                    <p class="text-sm text-secondary-light mb-12">
-                                                        {{ Str::limit($event->description, 100) }}
-                                                    </p>
+                                                    <span class="text-sm text-secondary-light">{{ Str::limit($event->description, 100) }}</span>
                                                 @else
-                                                    <p class="text-sm text-muted mb-12 fst-italic">Tidak ada keterangan</p>
+                                                    <span class="text-sm text-muted fst-italic">Tidak ada keterangan</span>
                                                 @endif
-
-                                                {{-- Action Buttons --}}
-                                                <div class="d-flex gap-2 mt-3">
+                                            </td>
+                                            <!-- <td>{{ $event->display_order }}</td> -->
+                                            <td>
+                                                @if($event->is_active)
+                                                    <span class="badge text-sm fw-semibold text-success-600 bg-success-100 px-20 py-9 radius-4">
+                                                        Aktif
+                                                    </span>
+                                                @else
+                                                    <span class="badge text-sm fw-semibold text-danger-600 bg-danger-100 px-20 py-9 radius-4">
+                                                        Nonaktif
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex align-items-center justify-content-center gap-2">
                                                     {{-- Toggle Active --}}
                                                     <form action="{{ route('events.toggle', $event->id) }}" method="POST"
-                                                        class="flex-fill">
+                                                        class="d-inline">
                                                         @csrf
                                                         <button type="submit"
-                                                            class="btn btn-sm w-100 btn-outline-{{ $event->is_active ? 'warning' : 'success' }}"
+                                                            class="btn btn-sm btn-outline-{{ $event->is_active ? 'warning' : 'success' }}"
                                                             title="{{ $event->is_active ? 'Nonaktifkan' : 'Aktifkan' }}">
-                                                            <iconify-icon icon="{{ $event->is_active ? 'mdi:eye-off' : 'mdi:eye' }}"
-                                                                class="me-1"></iconify-icon>
-                                                            {{ $event->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                                            <iconify-icon icon="{{ $event->is_active ? 'mdi:eye-off' : 'mdi:eye' }}"></iconify-icon>
                                                         </button>
                                                     </form>
 
                                                     {{-- Edit Button --}}
-                                                    <button type="button" class="btn btn-sm btn-outline-primary flex-fill"
+                                                    <button type="button" class="btn btn-sm btn-outline-primary"
                                                         data-bs-toggle="modal" data-bs-target="#editModal{{ $event->id }}"
                                                         title="Edit">
-                                                        <iconify-icon icon="mdi:pencil" class="me-1"></iconify-icon>
-                                                        Edit
+                                                        <iconify-icon icon="mdi:pencil"></iconify-icon>
                                                     </button>
 
                                                     {{-- Delete --}}
                                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST"
-                                                        class="flex-fill"
+                                                        class="d-inline"
                                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus event ini?')">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger w-100"
-                                                            title="Hapus">
-                                                            <iconify-icon icon="mdi:delete" class="me-1"></iconify-icon>
-                                                            Hapus
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                            <iconify-icon icon="mdi:delete"></iconify-icon>
                                                         </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        {{-- Edit Modal --}}
+                                        <div class="modal fade" id="editModal{{ $event->id }}" tabindex="-1">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit Event</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <form action="{{ route('events.update', $event->id) }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12 mb-3">
+                                                                    <label class="form-label">Nama Event <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        value="{{ $event->name }}" required>
+                                                                </div>
+                                                                <!-- <div class="col-md-6 mb-3">
+                                                                    <label class="form-label">Urutan Tampil</label>
+                                                                    <input type="number" name="display_order" class="form-control"
+                                                                        value="{{ $event->display_order }}" min="0">
+                                                                </div> -->
+                                                                <!-- <div class="col-12 mb-3">
+                                                                    <label class="form-label">Gambar Saat Ini</label>
+                                                                    <div class="mb-2">
+                                                                        @if($event->image_path)
+                                                                            <img src="{{ asset('storage/' . $event->image_path) }}"
+                                                                                class="img-fluid radius-8"
+                                                                                style="max-height: 200px; aspect-ratio: 16/9; object-fit: cover;">
+                                                                        @else
+                                                                            <span class="text-muted">Tidak ada gambar</span>
+                                                                        @endif
+                                                                    </div>
+                                                                    <label class="form-label">Upload Gambar Baru (Opsional)</label>
+                                                                    <input type="file" name="image" class="form-control" accept="image/*">
+                                                                    <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.
+                                                                        Rasio 16:9 recommended</small>
+                                                                </div> -->
+                                                                <div class="col-12 mb-3">
+                                                                    <label class="form-label">Keterangan</label>
+                                                                    <textarea name="description" class="form-control"
+                                                                        rows="4">{{ $event->description }}</textarea>
+                                                                </div>
+                                                                <div class="col-12 mb-3">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" name="is_active"
+                                                                            value="1" id="is_active_{{ $event->id }}" {{ $event->is_active ? 'checked' : '' }}>
+                                                                        <label class="form-check-label" for="is_active_{{ $event->id }}">
+                                                                            Aktif
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                {{-- Edit Modal --}}
-                                <div class="modal fade" id="editModal{{ $event->id }}" tabindex="-1">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Edit Event</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <form action="{{ route('events.update', $event->id) }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label class="form-label">Nama Event <span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="text" name="name" class="form-control"
-                                                                value="{{ $event->name }}" required>
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label class="form-label">Urutan Tampil</label>
-                                                            <input type="number" name="display_order" class="form-control"
-                                                                value="{{ $event->display_order }}" min="0">
-                                                        </div>
-                                                        <div class="col-12 mb-3">
-                                                            <label class="form-label">Gambar Saat Ini</label>
-                                                            <div class="mb-2">
-                                                                <img src="{{ asset('storage/' . $event->image_path) }}"
-                                                                    class="img-fluid radius-8"
-                                                                    style="max-height: 200px; aspect-ratio: 16/9; object-fit: cover;">
-                                                            </div>
-                                                            <label class="form-label">Upload Gambar Baru (Opsional)</label>
-                                                            <input type="file" name="image" class="form-control" accept="image/*">
-                                                            <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.
-                                                                Rasio 16:9 recommended</small>
-                                                        </div>
-                                                        <div class="col-12 mb-3">
-                                                            <label class="form-label">Keterangan</label>
-                                                            <textarea name="description" class="form-control"
-                                                                rows="4">{{ $event->description }}</textarea>
-                                                        </div>
-                                                        <div class="col-12 mb-3">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="is_active"
-                                                                    value="1" id="is_active_{{ $event->id }}" {{ $event->is_active ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="is_active_{{ $event->id }}">
-                                                                    Aktif
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -346,5 +339,18 @@
                 bsAlert.close();
             });
         }, 5000);
+
+        // Form collapse icon handler
+        const collapseUploadForm = document.getElementById('collapseUploadForm');
+        const uploadFormIcon = document.getElementById('uploadFormIcon');
+        
+        if (collapseUploadForm && uploadFormIcon) {
+            collapseUploadForm.addEventListener('show.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-up');
+            });
+            collapseUploadForm.addEventListener('hide.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-down');
+            });
+        }
     </script>
 @endpush

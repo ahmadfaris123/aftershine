@@ -94,22 +94,22 @@
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav gap-2 gap-lg-5" style="font-size: 13px;">
               <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#home">Home</a>
+                <a class="nav-link text-white transition-1" href="{{ route('landing.v2') }}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#profile">Profile</a>
+                <a class="nav-link text-white transition-1" href="{{ route('landing.v2') }}">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#personel">Personel</a>
+                <a class="nav-link text-white transition-1" href="{{ route('landing.v2') }}">Personel</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link text-white transition-1" href="#">Originals</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#music">Originals</a>
+                <a class="nav-link text-white transition-1" href="{{ route('landing.v2') }}">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#events">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white transition-1" href="#awards">Awards</a>
+                <a class="nav-link text-white transition-1" href="{{ route('landing.v2') }}">Awards</a>
               </li>
             </ul>
           </div>
@@ -120,149 +120,6 @@
       </div>
     </header>
     <!-- ========================= Banner SEction End =============================== -->
-
-    <!-- ========================== Brand Section Start =========================== -->
-    <section id="home" class="banner bg-white">
-        <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            @forelse($activeBackground as $item)
-            <div class="carousel-item @if($item->is_active) active @endif">
-              <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #f8f9fa;">
-            </div>
-            @empty
-            <div class="carousel-item active">
-              <img src="{{ asset('assets/landing_v2/images/AFTERSHINE_MAIN LOGO_BLACK.png') }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #f8f9fa;">
-            </div>
-            @endforelse
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-    </section>
-    <!-- ========================== Brand Section End =========================== -->
-
-    <!-- ============================= Features Section Start ============================== -->
-    <section
-      id="profile"
-      class="choose-us pt-120 position-relative z-1 bg-white"
-      style="background-color: #ffffff;"
-    >
-      <div class="container">
-        <div class="row gy-5 align-items-center">
-          <!-- Gambar di bagian kiri -->
-          <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1200">
-            <div class="position-relative d-inline-block">
-              <img src="{{ asset('assets/landing_v2/images/8.png') }}" alt="Aftershine" class="img-fluid rounded-16">
-                  <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-3.png') }}" alt="Logogram" class="position-absolute" style="top: 0; left: 0; transform: translate(-45%, -45%); width: 150px; z-index: 2;">
-            </div>
-          </div>
-          <!-- Teks di bagian kanan -->
-          <div class="col-lg-6">
-            <div class="testimonials__content">
-              <div class="section-heading style-left" style="margin-top: -20px;">
-                <p>About Us</p>
-                <h1 class="mb-24 wow bounceIn" style="color: #ffb83c">
-                  Aftershine
-                </h1>
-              </div>
-
-              <div class="testimonials__slider">
-                <div class="testimonials-item">
-                  <p
-                    class="text-dark"
-                    data-aos="fade-left"
-                    data-aos-duration="1200"
-                  >
-                    Hi, salam kenal, sebelum melangkah lebih jauh, izinkan kami menyapa. 
-                    <br>
-                    <br>
-                    Perkenalkan kami Afetrshine. lahir didesa dari jalan kecil yang lebih sering diselimuti suara jangkrik daripada sorot lampu kota.
-                    Kami tumbuh bersama debu sawah, tongkrongan sederhana, dan mimpi-mimpi besar yang diam-diam dipelihara di kepala.
-                    Membawa warna pop Jawa, kami meramu lirik-lirik yang dekat dengan hidup banyak orang, tentang patah hati, pulang, kelangan, hingga harapan yang tetap dipaksa hidup meski keadaan sempit.
-                    Musik kami bukan sekadar hiburan, tapi surat dari kampung kecil yang kami sisipkan untuk siapa saja yang sedang berjuang di luar sana.
-                    Dari desa, kami datang tanpa banyak gaduh dan perlahan menjelma jadi suara yang dinyanyikan banyak orang.
-                    <br>
-                    <br>
-                    Best Regrads,
-                    Aftershine
-                  </p>
-                </div>
-              </div>
-              <div class="flex-align gap-16 mt-40"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ============================= Features Section End ============================== -->
-
-    <section class="image-separator bg-white py-60">
-      <div class="container-fluid px-0" data-aos="fade-up" data-aos-duration="500">
-        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
-      </div>
-    </section>
-
-    <!-- ================================= testimonials Section Start ========================================= -->
-    <section id="personel" class="testimonials py-120 position-relative z-1">
-        <div class="container">
-
-            <div class="section-heading text-center">
-                <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-5.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
-            </div>
-
-            <div class="tutor-slider">
-                @forelse($personils as $personil)
-                    <div class="px-12" data-aos="fade-up" data-aos-duration="200">
-                        <div class="overflow-hidden mb-24">
-                            <img src="{{ asset('storage/' . $personil->photo_path) }}"
-                                class="w-100" style="aspect-ratio: 1/1; object-fit: cover;">
-                        </div>
-                        <div class="text-start">
-                            <h4 class="mb-12" style="color: #000; font-weight: 700;">{{ $personil->name }}</h4>
-                            <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->position }}</p>
-                            <!-- <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->phone }}</p> -->
-                            
-                            <div class="d-flex gap-16">
-                                @if($personil->instagram_url)
-                                    <a href="{{ $personil->instagram_url }}" target="_blank" class="text-dark transition-1 text-xl">
-                                        <i class="ph-bold ph-instagram-logo"></i>
-                                    </a>
-                                @endif
-                                @if($personil->tiktok_url)
-                                    <a href="{{ $personil->tiktok_url }}" target="_blank" class="text-dark transition-1 text-xl">
-                                        <i class="ph-bold ph-tiktok-logo"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="text-center p-5 w-100">
-                        <p>Belum ada personil yang ditambahkan.</p>
-                    </div>
-                @endforelse
-            </div>
-
-            <div class="flex-center gap-16 mt-40">
-                <button type="button" id="tutor-prev"
-                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-black">
-                    <i class="ph ph-caret-left"></i>
-                </button>
-                <button type="button" id="tutor-next"
-                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-black">
-                    <i class="ph ph-caret-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-    <!-- ================================= testimonials Section End ========================================= -->
-
     <!-- ================================= Blog Section Start ========================================= -->
     <section id="music" class="choose-us pt-120 position-relative z-1" style="background-color: #f8fafc;">
         <style>
@@ -306,23 +163,21 @@
                 <!-- Card 1 -->
                 @forelse($songs as $song)
                 <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="200">
-                    @php
-                        $ytUrl = $song->youtube_url ?? '';
-                        $ytId = '';
-                        if (preg_match('/youtu\.be\/([^?&\/]+)/', $ytUrl, $m)) {
-                            $ytId = $m[1];
-                        } elseif (preg_match('/[?&]v=([^&]+)/', $ytUrl, $m)) {
-                            $ytId = $m[1];
-                        }
-                        
-                        $cleanYtUrl = $ytId ? "https://www.youtube.com/watch?v={$ytId}" : $ytUrl;
-                        $thumbSrc = $ytId
-                            ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg"
-                            : "https://img.youtube.com/hqdefault.jpg";
-                    @endphp
-                    <a href="{{ $cleanYtUrl }}" class="popup-youtube d-block text-decoration-none h-100">
+                    <a href="{{ $song->youtube_url }}" class="popup-youtube d-block text-decoration-none h-100">
                         <div class="bg-white h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
                             <div class="position-relative overflow-hidden">
+                                @php
+                                    $ytUrl = $song->youtube_url ?? '';
+                                    $ytId = '';
+                                    if (preg_match('/youtu\.be\/([^?&\/]+)/', $ytUrl, $m)) {
+                                        $ytId = $m[1];
+                                    } elseif (preg_match('/[?&]v=([^&]+)/', $ytUrl, $m)) {
+                                        $ytId = $m[1];
+                                    }
+                                    $thumbSrc = $ytId
+                                        ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg"
+                                        : Storage::url($song->thumbnail_path);
+                                @endphp
                                 <img src="{{ $thumbSrc }}" alt="{{ $song->title }}" class="w-100" style="aspect-ratio: 16/9; object-fit: cover;">
                                 <div class="play-btn position-absolute top-50 start-50 translate-middle bg-white rounded-circle flex-center" style="width: 48px; height: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                                     <i class="ph-fill ph-play" style="font-size: 24px; color: #0f172a; margin-left: 4px;"></i>
@@ -346,190 +201,10 @@
 
             <!-- Tombol Liat Semua -->
             <div class="text-center mt-40 mb-40" data-aos="fade-up">
-                <a href="{{ route('originals') }}" class="btn rounded-pill fw-bold transition-2" style="background-color: #0f172a; color: #fff; padding: 14px 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
-                    Liat Semua <i class="ph-bold ph-caret-right text-lg"></i>
-                </a>
             </div>
         </div>
     </section>
     <!-- ================================= Blog Section End ========================================= -->
-
-    <!-- ================================= testimonials Section Start ========================================= -->
-    <section id="events" class="py-120 position-relative z-1" style="background-color: #ffffff;">
-        <style>
-            .events-table thead th {
-                font-size: 11px;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-                color: #0f172a;
-                padding: 0 16px 20px 0;
-                border: none;
-                white-space: nowrap;
-            }
-            .events-table tbody td {
-                padding: 20px 16px 20px 0;
-                border: none;
-                border-top: 1px solid #e2e8f0;
-                vertical-align: middle;
-            }
-            .events-table tbody tr:first-child td {
-                border-top: 1px solid #e2e8f0;
-            }
-            .events-table .show-name {
-                font-size: 14px;
-                font-weight: 700;
-                color: #0f172a;
-                line-height: 1.4;
-            }
-            .events-table .show-city {
-                font-size: 12px;
-                color: #94a3b8;
-                font-weight: 500;
-                margin-top: 2px;
-            }
-            .events-table .show-time {
-                font-size: 13px;
-                color: #475569;
-                white-space: nowrap;
-            }
-            .events-table .show-location {
-                font-size: 13px;
-                color: #475569;
-            }
-            .btn-more-info {
-                font-size: 11px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                color: #0f172a;
-                border: 1.5px solid #0f172a;
-                border-radius: 50px;
-                padding: 6px 18px;
-                background: transparent;
-                transition: all 0.25s ease;
-                white-space: nowrap;
-                text-decoration: none;
-                display: inline-block;
-            }
-            .btn-more-info:hover {
-                background: #0f172a;
-                color: #fff;
-            }
-        </style>
-        <div class="container">
-            <div class="section-heading text-center mb-48">
-                <h2 class="wow bounceIn" style="color: #ffb83c">Events</h2>
-            </div>
-
-            <div class="table-responsive" data-aos="fade-up">
-                <table class="events-table table table-borderless w-100">
-                    <thead>
-                        <tr>
-                            <th>Show</th>
-                            <th>Time</th>
-                            <th>Location</th>
-                            <th>Show Detail</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($events as $event)
-                        <tr>
-                            <td>
-                                <div class="show-name" >{{ $event->name }}</div>
-                            </td>
-                            <td><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
-                            <td><span class="show-location">{{ $event->location }}</span></td>
-                            <td><a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a></td>
-                        </tr>
-                        @empty
-                            <td colspan="4" class="text-center p-5 w-100">
-                                <p>Belum ada event yang ditambahkan.</p>
-                            </td>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <!-- ================================= testimonials Section Start ========================================= -->
-
-    <!-- ================================= Blog Section Start ========================================= -->
-    <section id="awards" class="py-120 bg-white position-relative" style="background-color: #ffffff;">
-        <style>
-            .award-card {
-                position: relative;
-                overflow: hidden;
-                cursor: pointer;
-            }
-            .award-card img {
-                width: 100%;
-                aspect-ratio: 1/1;
-                object-fit: cover;
-                display: block;
-                transition: transform 0.5s ease;
-            }
-            .award-card:hover img {
-                transform: scale(1.05);
-            }
-            .award-card__overlay {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                padding: 28px 20px 20px;
-                background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
-            }
-            .award-card__place {
-                font-size: 22px;
-                font-weight: 800;
-                color: #ffffff;
-                line-height: 1.2;
-                margin-bottom: 4px;
-                font-family: "Open Sans", sans-serif;
-            }
-            .award-card__name {
-                font-size: 13px;
-                color: rgba(255,255,255,0.85);
-                font-weight: 400;
-            }
-        </style>
-        <div class="container">
-            <div class="section-heading text-center mb-40">
-                <h2 class="wow bounceIn" style="color: #ffb83c">Awards</h2>
-            </div>
-
-            <div class="award-slider px-12">
-                <!-- Card 1 -->
-                @forelse($awards as $award)
-                <div class="px-8">
-                    <div class="award-card">
-                        <img src="{{ asset('storage/' . $award->image_path) }}" alt="{{ $award->name }}">
-                        <div class="award-card__overlay">
-                            <div class="award-card__place">{{ $award->name }}</div>
-                            <div class="award-card__name">{{ $award->description }}</div>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                    <div class="text-center p-5 w-100">
-                        <p>Belum ada Award yang ditambahkan.</p>
-                    </div>
-                @endforelse
-            </div>
-
-            <div class="flex-center gap-16 mt-40">
-                <button type="button" id="award-prev"
-                    class="slick-prev slick-arrow flex-center rounded-circle border border-dark hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-dark">
-                    <i class="ph ph-caret-left"></i>
-                </button>
-                <button type="button" id="award-next"
-                    class="slick-next slick-arrow flex-center rounded-circle border border-dark hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-dark">
-                    <i class="ph ph-caret-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
 
     <!-- ==================== Footer Start Here ==================== -->
     <footer class="footer position-relative z-1">

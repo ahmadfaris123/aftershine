@@ -18,6 +18,8 @@ Route::get('/doc', function () {
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.v2');
 
+Route::get('/originals', [LandingController::class, 'originals'])->name('originals');
+
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');

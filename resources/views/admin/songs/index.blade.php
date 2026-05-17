@@ -46,10 +46,14 @@
     <div class="row gy-4">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-24">
-                    <h6 class="text-md text-primary-light mb-16">Tambah Lagu Baru</h6>
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent border-0 p-24" data-bs-toggle="collapse" data-bs-target="#collapseUploadForm" aria-expanded="false" aria-controls="collapseUploadForm" style="cursor: pointer;">
+                    <h6 class="text-md text-primary-light mb-0">Tambah Lagu Baru</h6>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform" id="uploadFormIcon"></iconify-icon>
+                </div>
+                <div class="collapse" id="collapseUploadForm">
+                    <div class="card-body p-24 pt-0">
 
-                    <form action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             {{-- Artist Name --}}
@@ -71,7 +75,7 @@
                             </div>
 
                             {{-- Release Date --}}
-                            <div class="col-md-6 mb-20">
+                            <div class="col-md-12 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Tanggal Rilis <span class="text-danger">*</span>
                                 </label>
@@ -79,16 +83,16 @@
                             </div>
 
                             {{-- Display Order --}}
-                            <div class="col-md-6 mb-20">
+                            <!-- <div class="col-md-6 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Urutan Tampil
                                 </label>
                                 <input type="number" name="display_order" class="form-control radius-8" placeholder="0"
                                     value="0" min="0">
-                            </div>
+                            </div> -->
 
                             {{-- Thumbnail Upload --}}
-                            <div class="col-12 mb-20">
+                            <!-- <div class="col-12 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Thumbnail (Rasio 16:9) <span class="text-danger">*</span>
                                 </label>
@@ -117,7 +121,7 @@
                                 </div>
                                 <small class="text-muted">Format: JPEG, PNG, JPG, WEBP. Maksimal 5MB. Rasio 16:9 (contoh:
                                     1920x1080)</small>
-                            </div>
+                            </div> -->
 
                             {{-- YouTube URL --}}
                             <div class="col-12 mb-20">
@@ -162,7 +166,8 @@
                                 Tambah Lagu
                             </button>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,7 +187,7 @@
                                         <th scope="col">Informasi Lagu</th>
                                         <th scope="col">Tanggal Rilis</th>
                                         <th scope="col">YouTube</th>
-                                        <th scope="col">Urutan</th>
+                                        <!-- <th scope="col">Urutan</th> -->
                                         <th scope="col">Status</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
@@ -191,7 +196,19 @@
                                     @foreach($songs as $song)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset('storage/' . $song->thumbnail_path) }}" alt="{{ $song->title }}"
+                                                @php
+                                                    $ytUrl = $song->youtube_url ?? '';
+                                                    $ytId = '';
+                                                    if (preg_match('/youtu\.be\/([^?&\/]+)/', $ytUrl, $m)) {
+                                                        $ytId = $m[1];
+                                                    } elseif (preg_match('/[?&]v=([^&]+)/', $ytUrl, $m)) {
+                                                        $ytId = $m[1];
+                                                    }
+                                                    $thumbSrc = $ytId
+                                                        ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg"
+                                                        : "https://img.youtube.com/hqdefault.jpg";
+                                                @endphp
+                                                <img src="{{ $thumbSrc }}" alt="{{ $song->title }}"
                                                     class="w-120-px h-67-px object-fit-cover radius-8" style="aspect-ratio: 16/9;">
                                             </td>
                                             <td>
@@ -210,7 +227,7 @@
                                                     <iconify-icon icon="mdi:youtube"></iconify-icon>
                                                 </a>
                                             </td>
-                                            <td>{{ $song->display_order }}</td>
+                                            <!-- <td>{{ $song->display_order }}</td> -->
                                             <td>
                                                 @if($song->is_active)
                                                     <span
@@ -285,17 +302,17 @@
                                                                     <input type="text" name="title" class="form-control"
                                                                         value="{{ $song->title }}" required>
                                                                 </div>
-                                                                <div class="col-md-6 mb-3">
+                                                                <div class="col-md-12 mb-3">
                                                                     <label class="form-label">Tanggal Rilis <span
                                                                             class="text-danger">*</span></label>
                                                                     <input type="date" name="release_date" class="form-control"
                                                                         value="{{ $song->release_date_input }}" required>
                                                                 </div>
-                                                                <div class="col-md-6 mb-3">
+                                                                <!-- <div class="col-md-6 mb-3">
                                                                     <label class="form-label">Urutan Tampil</label>
                                                                     <input type="number" name="display_order" class="form-control"
                                                                         value="{{ $song->display_order }}" min="0">
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-12 mb-3">
                                                                     <label class="form-label">Thumbnail Saat Ini</label>
                                                                     <div class="mb-2">
@@ -400,5 +417,18 @@
                 bsAlert.close();
             });
         }, 5000);
+
+        // Form collapse icon handler
+        const collapseUploadForm = document.getElementById('collapseUploadForm');
+        const uploadFormIcon = document.getElementById('uploadFormIcon');
+        
+        if (collapseUploadForm && uploadFormIcon) {
+            collapseUploadForm.addEventListener('show.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-up');
+            });
+            collapseUploadForm.addEventListener('hide.bs.collapse', event => {
+                uploadFormIcon.setAttribute('icon', 'mdi:chevron-down');
+            });
+        }
     </script>
 @endpush

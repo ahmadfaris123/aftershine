@@ -38,8 +38,8 @@ class PersonilController extends Controller
             'twitter_url' => 'nullable|url|max:255',
             'tiktok_url' => 'nullable|url|max:255',
             'bio' => 'nullable|string',
-            'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            // 'display_order' => 'nullable|integer',
+            // 'is_active' => 'boolean'
         ], [
             'name.required' => 'Nama personil wajib diisi',
             'position.required' => 'Posisi personil wajib diisi',
@@ -74,8 +74,8 @@ class PersonilController extends Controller
                     'twitter_url' => $validated['twitter_url'] ?? null,
                     'tiktok_url' => $validated['tiktok_url'] ?? null,
                     'bio' => $validated['bio'] ?? null,
-                    'display_order' => $validated['display_order'] ?? 0,
-                    'is_active' => $validated['is_active'] ?? true
+                    // 'display_order' => $validated['display_order'] ?? 0,
+                    // 'is_active' => $validated['is_active'] ?? true
                 ]);
 
                 return redirect()->back()->with('success', 'Personil berhasil ditambahkan');
@@ -105,8 +105,8 @@ class PersonilController extends Controller
             'twitter_url' => 'nullable|url|max:255',
             'tiktok_url' => 'nullable|url|max:255',
             'bio' => 'nullable|string',
-            'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            // 'display_order' => 'nullable|integer',
+            // 'is_active' => 'boolean'
         ], [
             'name.required' => 'Nama personil wajib diisi',
             'position.required' => 'Posisi personil wajib diisi',

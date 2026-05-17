@@ -18,7 +18,7 @@ class LandingController extends Controller
     public function index()
     {
         // Get active background (is_active = 1)
-        $activeBackground = Background::where('is_active', true)->first();
+        $activeBackground = Background::get();
 
         // Get settings (singleton)
         $settings = Setting::first();
@@ -70,5 +70,21 @@ class LandingController extends Controller
         }
 
         return 'https://wa.me/' . $cleanNumber;
+    }
+
+    public function originals()
+    {
+        // Get all active songs ordered by display_order (latest first if you want newest songs first)
+        $songs = Song::active()->ordered()->get();
+
+        // Get settings (singleton)
+        $settings = Setting::first();
+
+        $data = [
+            'settings' => $settings,
+            'songs' => $songs,
+        ];
+
+        return view('landing.originals', $data);
     }
 }

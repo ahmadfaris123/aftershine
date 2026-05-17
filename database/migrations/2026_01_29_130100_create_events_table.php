@@ -13,8 +13,11 @@ return new class extends Migration {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_path');
+            $table->string('location')->nullable();
+            $table->date('date')->nullable();
+            $table->string('image_path')->nullable();
             $table->text('description')->nullable();
+            $table->string('url')->nullable();
             $table->integer('display_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

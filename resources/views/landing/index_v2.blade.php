@@ -46,6 +46,8 @@
       }
       body { 
         font-family: 'JMH Typewriter', monospace; 
+        background-color: #000000;
+        color: #e2e8f0;
       }
       html { scroll-behavior: smooth; }
       .header { transition: all 0.3s ease; background-color: #000000 !important; padding: 15px 0 !important; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -122,16 +124,16 @@
     <!-- ========================= Banner SEction End =============================== -->
 
     <!-- ========================== Brand Section Start =========================== -->
-    <section id="home" class="banner bg-white">
+    <section id="home" class="banner" style="background-color: #000000;">
         <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             @forelse($activeBackground as $item)
             <div class="carousel-item @if($item->is_active) active @endif">
-              <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #f8f9fa;">
+              <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #000000;">
             </div>
             @empty
             <div class="carousel-item active">
-              <img src="{{ asset('assets/landing_v2/images/AFTERSHINE_MAIN LOGO_BLACK.png') }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #f8f9fa;">
+              <img src="{{ asset('assets/landing_v2/images/AFTERSHINE_MAIN LOGO_BLACK.png') }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #000000;">
             </div>
             @endforelse
           </div>
@@ -150,8 +152,8 @@
     <!-- ============================= Features Section Start ============================== -->
     <section
       id="profile"
-      class="choose-us pt-120 position-relative z-1 bg-white"
-      style="background-color: #ffffff;"
+      class="choose-us pt-120 position-relative z-1"
+      style="background-color: #000000;"
     >
       <div class="container">
         <div class="row gy-5 align-items-center">
@@ -175,9 +177,10 @@
               <div class="testimonials__slider">
                 <div class="testimonials-item">
                   <p
-                    class="text-dark"
+                    class="text-white"
                     data-aos="fade-left"
                     data-aos-duration="1200"
+                    style="line-height: 1.8; color: #e2e8f0 !important;"
                   >
                     Hi, salam kenal, sebelum melangkah lebih jauh, izinkan kami menyapa. 
                     <br>
@@ -202,9 +205,9 @@
     </section>
     <!-- ============================= Features Section End ============================== -->
 
-    <section class="image-separator bg-white py-60">
+    <section class="image-separator py-60" style="background-color: #000000;">
       <div class="container-fluid px-0" data-aos="fade-up" data-aos-duration="500">
-        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
+        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover" style="filter: brightness(0.8);">
       </div>
     </section>
 
@@ -224,18 +227,18 @@
                                 class="w-100" style="aspect-ratio: 1/1; object-fit: cover;">
                         </div>
                         <div class="text-start">
-                            <h4 class="mb-12" style="color: #000; font-weight: 700;">{{ $personil->name }}</h4>
-                            <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->position }}</p>
+                            <h4 class="mb-12" style="color: #ffffff; font-weight: 700;">{{ $personil->name }}</h4>
+                            <p class="mb-8" style="color: #cbd5e1; font-size: 14px;">{{ $personil->position }}</p>
                             <!-- <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->phone }}</p> -->
                             
                             <div class="d-flex gap-16">
                                 @if($personil->instagram_url)
-                                    <a href="{{ $personil->instagram_url }}" target="_blank" class="text-dark transition-1 text-xl">
+                                    <a href="{{ $personil->instagram_url }}" target="_blank" class="text-white transition-1 text-xl">
                                         <i class="ph-bold ph-instagram-logo"></i>
                                     </a>
                                 @endif
                                 @if($personil->tiktok_url)
-                                    <a href="{{ $personil->tiktok_url }}" target="_blank" class="text-dark transition-1 text-xl">
+                                    <a href="{{ $personil->tiktok_url }}" target="_blank" class="text-white transition-1 text-xl">
                                         <i class="ph-bold ph-tiktok-logo"></i>
                                     </a>
                                 @endif
@@ -251,11 +254,11 @@
 
             <div class="flex-center gap-16 mt-40">
                 <button type="button" id="tutor-prev"
-                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-black">
+                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <button type="button" id="tutor-next"
-                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-black">
+                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-right"></i>
                 </button>
             </div>
@@ -264,7 +267,7 @@
     <!-- ================================= testimonials Section End ========================================= -->
 
     <!-- ================================= Blog Section Start ========================================= -->
-    <section id="music" class="choose-us pt-120 position-relative z-1" style="background-color: #f8fafc;">
+    <section id="music" class="choose-us pt-120 position-relative z-1" style="background-color: #050505;">
         <style>
             .video-card {
                 box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -294,10 +297,10 @@
             <!-- Header Section -->
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-40" data-aos="fade-up">
                 <div class="mb-3 mb-md-0">
-                    <span style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Dari Youtube</span>
-                    <h2 class="mb-0" style="font-weight: 900; font-size: 32px; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px;">Video Lainnya</h2>
+                    <span style="color: #cbd5e1; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Dari Youtube</span>
+                    <h2 class="mb-0" style="font-weight: 900; font-size: 32px; color: #ffffff; text-transform: uppercase; letter-spacing: -0.5px;">Video Lainnya</h2>
                 </div>
-                <a href="https://www.youtube.com/@AFTERSHINE/videos" target="_blank" class="btn rounded-pill flex-align gap-8 fw-bold transition-2" style="background-color: #0f172a; color: #fff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
+                <a href="https://www.youtube.com/@AFTERSHINE/videos" target="_blank" class="btn rounded-pill btn-outline-white flex-align gap-8 fw-bold transition-2 text-white" style="background-color: #111111; color: #ffffff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
                     Tonton di Youtube <i class="ph-bold ph-caret-right text-lg"></i>
                 </a>
             </div>
@@ -321,15 +324,15 @@
                             : "https://img.youtube.com/hqdefault.jpg";
                     @endphp
                     <a href="{{ $cleanYtUrl }}" class="popup-youtube d-block text-decoration-none h-100">
-                        <div class="bg-white h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
+                        <div class="bg-dark h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
                             <div class="position-relative overflow-hidden">
                                 <img src="{{ $thumbSrc }}" alt="{{ $song->title }}" class="w-100" style="aspect-ratio: 16/9; object-fit: cover;">
                                 <div class="play-btn position-absolute top-50 start-50 translate-middle bg-white rounded-circle flex-center" style="width: 48px; height: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                                     <i class="ph-fill ph-play" style="font-size: 24px; color: #0f172a; margin-left: 4px;"></i>
                                 </div>
                             </div>
-                            <div class="p-20 d-flex flex-column flex-grow-1">
-                                <h5 class="mb-16 text-line-3" style="font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.5;">{{ $song->title }}</h5>
+                            <div class="p-20 d-flex flex-column flex-grow-1" style="background-color: #111;">
+                                <h5 class="mb-16 text-line-3" style="font-size: 15px; font-weight: 700; color: #ffffff; line-height: 1.5;">{{ $song->title }}</h5>
                                 <div class="mt-auto">
                                     <span style="color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{{ \Carbon\Carbon::parse($song->release_date)->format('d F Y') }}</span>
                                 </div>
@@ -346,7 +349,7 @@
 
             <!-- Tombol Liat Semua -->
             <div class="text-center mt-40 mb-40" data-aos="fade-up">
-                <a href="{{ route('originals') }}" class="btn rounded-pill fw-bold transition-2" style="background-color: #0f172a; color: #fff; padding: 14px 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
+                <a href="{{ route('originals') }}" class="btn rounded-pill btn-outline-white fw-bold transition-2 text-white" style="background-color: #111111; color: #ffffff; padding: 14px 40px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
                     Liat Semua <i class="ph-bold ph-caret-right text-lg"></i>
                 </a>
             </div>
@@ -355,14 +358,14 @@
     <!-- ================================= Blog Section End ========================================= -->
 
     <!-- ================================= testimonials Section Start ========================================= -->
-    <section id="events" class="py-120 position-relative z-1" style="background-color: #ffffff;">
+    <section id="events" class="py-120 position-relative z-1" style="background-color: #000000;">
         <style>
             .events-table thead th {
                 font-size: 11px;
                 font-weight: 800;
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
-                color: #0f172a;
+                color: #ffffff;
                 padding: 0 16px 20px 0;
                 border: none;
                 white-space: nowrap;
@@ -370,16 +373,16 @@
             .events-table tbody td {
                 padding: 20px 16px 20px 0;
                 border: none;
-                border-top: 1px solid #e2e8f0;
+                border-top: 1px solid #334155;
                 vertical-align: middle;
             }
             .events-table tbody tr:first-child td {
-                border-top: 1px solid #e2e8f0;
+                border-top: 1px solid #334155;
             }
             .events-table .show-name {
                 font-size: 14px;
                 font-weight: 700;
-                color: #0f172a;
+                color: #ffffff;
                 line-height: 1.4;
             }
             .events-table .show-city {
@@ -390,20 +393,20 @@
             }
             .events-table .show-time {
                 font-size: 13px;
-                color: #475569;
+                color: #cbd5e1;
                 white-space: nowrap;
             }
             .events-table .show-location {
                 font-size: 13px;
-                color: #475569;
+                color: #cbd5e1;
             }
             .btn-more-info {
                 font-size: 11px;
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.8px;
-                color: #0f172a;
-                border: 1.5px solid #0f172a;
+                color: #ffffff;
+                border: 1.5px solid #ffffff;
                 border-radius: 50px;
                 padding: 6px 18px;
                 background: transparent;
@@ -413,8 +416,8 @@
                 display: inline-block;
             }
             .btn-more-info:hover {
-                background: #0f172a;
-                color: #fff;
+                background: #ffffff;
+                color: #000000;
             }
         </style>
         <div class="container">
@@ -423,7 +426,7 @@
             </div>
 
             <div class="table-responsive" data-aos="fade-up">
-                <table class="events-table table table-borderless w-100">
+                <table class="events-table table table-dark table-borderless w-100" style="background-color: transparent;">
                     <thead>
                         <tr>
                             <th>Show</th>
@@ -434,18 +437,20 @@
                     </thead>
                     <tbody>
                         @forelse($events as $event)
-                        <tr>
-                            <td>
+                        <tr style="background-color: transparent;">
+                            <td style="background-color: transparent;">
                                 <div class="show-name" >{{ $event->name }}</div>
                             </td>
-                            <td><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
-                            <td><span class="show-location">{{ $event->location }}</span></td>
-                            <td><a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a></td>
+                            <td style="background-color: transparent;"><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
+                            <td style="background-color: transparent;"><span class="show-location">{{ $event->location }}</span></td>
+                            <td style="background-color: transparent;"><a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a></td>
                         </tr>
                         @empty
-                            <td colspan="4" class="text-center p-5 w-100">
-                                <p>Belum ada event yang ditambahkan.</p>
-                            </td>
+                            <tr style="background-color: transparent;">
+                                <td colspan="4" class="text-center p-5 w-100" style="background-color: transparent;">
+                                    <p class="text-white mb-0">Belum ada event yang ditambahkan.</p>
+                                </td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -455,7 +460,7 @@
     <!-- ================================= testimonials Section Start ========================================= -->
 
     <!-- ================================= Blog Section Start ========================================= -->
-    <section id="awards" class="py-120 bg-white position-relative" style="background-color: #ffffff;">
+    <section id="awards" class="py-120 bg-dark position-relative" style="background-color: #050505 !important;">
         <style>
             .award-card {
                 position: relative;
@@ -520,11 +525,11 @@
 
             <div class="flex-center gap-16 mt-40">
                 <button type="button" id="award-prev"
-                    class="slick-prev slick-arrow flex-center rounded-circle border border-dark hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-dark">
+                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <button type="button" id="award-next"
-                    class="slick-next slick-arrow flex-center rounded-circle border border-dark hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-dark">
+                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-right"></i>
                 </button>
             </div>
@@ -547,7 +552,7 @@
                                 <br>
                                 <br>
                                 <a href="#">
-                                    <img src="{{ asset('assets/landing_v2/images/logo.png') }}" alt="Logo">
+                                    <img src="{{ asset('assets/landing_v2/images/logo-light.png') }}" alt="Logo">
                                 </a>
                             </div>
                             <!-- <p class="my-32">EduAll exceeded all my expectations! The instructors were not only experts</p> -->
@@ -559,11 +564,11 @@
                             @if(isset($settings->phone_number))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-whatsapp-logo text-black"></i></span>
+                                            class="ph ph-whatsapp-logo text-white"></i></span>
                                     <div class="">
                                         <a href="{{ LandingController::getWhatsAppLink($settings->phone_number) }}"
                                             target="_blank"
-                                            class="text-black d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -571,10 +576,10 @@
                             @if(isset($settings->email))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-envelope-open text-black"></i></span>
+                                            class="ph ph-envelope-open text-white"></i></span>
                                     <div class="">
                                         <a href="mailto:{{ $settings->email }}"
-                                            class="text-black d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -588,20 +593,20 @@
                                 @if(isset($settings->facebook_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-facebook-logo text-black"></i></span>
+                                                class="ph-bold ph-facebook-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->facebook_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">Facebook</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Facebook</a>
                                         </div>
                                     </div>
                                 @endif
 
                                 @if(isset($settings->twitter_url))
                                     <div class="flex-align gap-20 mb-24">
-                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-black"></i></span>
+                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->twitter_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">X (Twitter)</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">X (Twitter)</a>
                                         </div>
                                     </div>
                                 @endif
@@ -616,10 +621,10 @@
                                 @if(isset($settings->instagram_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-instagram-logo text-black"></i></span>
+                                                class="ph-bold ph-instagram-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->instagram_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">Instagram</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Instagram</a>
                                         </div>
                                     </div>
                                 @endif
@@ -627,10 +632,10 @@
                                 @if(isset($settings->tiktok_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-tiktok-logo text-black"></i></span>
+                                                class="ph-bold ph-tiktok-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->tiktok_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">TikTok</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">TikTok</a>
                                         </div>
                                     </div>
                                 @endif
@@ -642,10 +647,10 @@
         </div>
         <div class="container">
             <!-- bottom Footer -->
-            <div class="bottom-footer border-top border-dashed border-main-100 border-0 py-32">
+            <div class="bottom-footer border-top border-dashed border-main-100 border-0 py-32" style="border-color: #333 !important;">
                 <div class="container container-two">
                     <div class="bottom-footer__inner flex-between gap-3 flex-wrap">
-                        <p class="bottom-footer__text text-black"> Copyright &copy; {{ date('Y') }} <span
+                        <p class="bottom-footer__text text-white"> Copyright &copy; {{ date('Y') }} <span
                                 class="fw-semibold">{{ $settings->brand_name ?? 'Aftershine' }}</span> All Rights
                             Reserved.</p>
                     </div>

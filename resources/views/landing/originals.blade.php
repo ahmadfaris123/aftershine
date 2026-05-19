@@ -46,6 +46,8 @@
       }
       body { 
         font-family: 'JMH Typewriter', monospace; 
+        background-color: #000000;
+        color: #e2e8f0;
       }
       html { scroll-behavior: smooth; }
       .header { transition: all 0.3s ease; background-color: #000000 !important; padding: 15px 0 !important; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -121,7 +123,7 @@
     </header>
     <!-- ========================= Banner SEction End =============================== -->
     <!-- ================================= Blog Section Start ========================================= -->
-    <section id="music" class="choose-us pt-120 position-relative z-1" style="background-color: #f8fafc;">
+    <section id="music" class="choose-us pt-120 position-relative z-1" style="background-color: #050505;">
         <style>
             .video-card {
                 box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -151,10 +153,10 @@
             <!-- Header Section -->
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-40" data-aos="fade-up">
                 <div class="mb-3 mb-md-0">
-                    <span style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Dari Youtube</span>
-                    <h2 class="mb-0" style="font-weight: 900; font-size: 32px; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px;">Video Lainnya</h2>
+                    <span style="color: #cbd5e1; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Dari Youtube</span>
+                    <h2 class="mb-0" style="font-weight: 900; font-size: 32px; color: #ffffff; text-transform: uppercase; letter-spacing: -0.5px;">Video Lainnya</h2>
                 </div>
-                <a href="https://www.youtube.com/@AFTERSHINE/videos" target="_blank" class="btn rounded-pill flex-align gap-8 fw-bold transition-2" style="background-color: #0f172a; color: #fff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
+                <a href="https://www.youtube.com/@AFTERSHINE/videos" target="_blank" class="btn rounded-pill btn-outline-white flex-align gap-8 fw-bold transition-2 text-white" style="background-color: #111111; color: #ffffff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
                     Tonton di Youtube <i class="ph-bold ph-caret-right text-lg"></i>
                 </a>
             </div>
@@ -164,7 +166,7 @@
                 @forelse($songs as $song)
                 <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="200">
                     <a href="{{ $song->youtube_url }}" class="popup-youtube d-block text-decoration-none h-100">
-                        <div class="bg-white h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
+                        <div class="bg-dark h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
                             <div class="position-relative overflow-hidden">
                                 @php
                                     $ytUrl = $song->youtube_url ?? '';
@@ -183,8 +185,8 @@
                                     <i class="ph-fill ph-play" style="font-size: 24px; color: #0f172a; margin-left: 4px;"></i>
                                 </div>
                             </div>
-                            <div class="p-20 d-flex flex-column flex-grow-1">
-                                <h5 class="mb-16 text-line-3" style="font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.5;">{{ $song->title }}</h5>
+                            <div class="p-20 d-flex flex-column flex-grow-1" style="background-color: #111;">
+                                <h5 class="mb-16 text-line-3" style="font-size: 15px; font-weight: 700; color: #ffffff; line-height: 1.5;">{{ $song->title }}</h5>
                                 <div class="mt-auto">
                                     <span style="color: #94a3b8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{{ \Carbon\Carbon::parse($song->release_date)->format('d F Y') }}</span>
                                 </div>
@@ -222,7 +224,7 @@
                                 <br>
                                 <br>
                                 <a href="#">
-                                    <img src="{{ asset('assets/landing_v2/images/logo.png') }}" alt="Logo">
+                                    <img src="{{ asset('assets/landing_v2/images/logo-light.png') }}" alt="Logo">
                                 </a>
                             </div>
                             <!-- <p class="my-32">EduAll exceeded all my expectations! The instructors were not only experts</p> -->
@@ -234,11 +236,11 @@
                             @if(isset($settings->phone_number))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-whatsapp-logo text-black"></i></span>
+                                            class="ph ph-whatsapp-logo text-white"></i></span>
                                     <div class="">
                                         <a href="{{ LandingController::getWhatsAppLink($settings->phone_number) }}"
                                             target="_blank"
-                                            class="text-black d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->phone_number }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -246,10 +248,10 @@
                             @if(isset($settings->email))
                                 <div class="flex-align gap-20 mb-24">
                                     <span class="icon d-flex text-32 text-main-600"><i
-                                            class="ph ph-envelope-open text-black"></i></span>
+                                            class="ph ph-envelope-open text-white"></i></span>
                                     <div class="">
                                         <a href="mailto:{{ $settings->email }}"
-                                            class="text-black d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
+                                            class="text-white d-block hover-text-main-600 mb-4">{{ $settings->email }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -263,20 +265,20 @@
                                 @if(isset($settings->facebook_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-facebook-logo text-black"></i></span>
+                                                class="ph-bold ph-facebook-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->facebook_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">Facebook</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Facebook</a>
                                         </div>
                                     </div>
                                 @endif
 
                                 @if(isset($settings->twitter_url))
                                     <div class="flex-align gap-20 mb-24">
-                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-black"></i></span>
+                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->twitter_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">X (Twitter)</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">X (Twitter)</a>
                                         </div>
                                     </div>
                                 @endif
@@ -291,10 +293,10 @@
                                 @if(isset($settings->instagram_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-instagram-logo text-black"></i></span>
+                                                class="ph-bold ph-instagram-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->instagram_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">Instagram</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">Instagram</a>
                                         </div>
                                     </div>
                                 @endif
@@ -302,10 +304,10 @@
                                 @if(isset($settings->tiktok_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-tiktok-logo text-black"></i></span>
+                                                class="ph-bold ph-tiktok-logo text-white"></i></span>
                                         <div class="">
                                             <a href="{{ $settings->tiktok_url }}" target="_blank"
-                                                class="text-black d-block hover-text-main-600 mb-4">TikTok</a>
+                                                class="text-white d-block hover-text-main-600 mb-4">TikTok</a>
                                         </div>
                                     </div>
                                 @endif
@@ -317,10 +319,10 @@
         </div>
         <div class="container">
             <!-- bottom Footer -->
-            <div class="bottom-footer border-top border-dashed border-main-100 border-0 py-32">
+            <div class="bottom-footer border-top border-dashed border-main-100 border-0 py-32" style="border-color: #333 !important;">
                 <div class="container container-two">
                     <div class="bottom-footer__inner flex-between gap-3 flex-wrap">
-                        <p class="bottom-footer__text text-black"> Copyright &copy; {{ date('Y') }} <span
+                        <p class="bottom-footer__text text-white"> Copyright &copy; {{ date('Y') }} <span
                                 class="fw-semibold">{{ $settings->brand_name ?? 'Aftershine' }}</span> All Rights
                             Reserved.</p>
                     </div>

@@ -450,10 +450,10 @@
                 <table class="events-table table table-dark table-borderless w-100" style="background-color: transparent;">
                     <thead>
                         <tr>
-                            <th>Show</th>
-                            <th>Time</th>
-                            <th>Location</th>
-                            <th>Show Detail</th>
+                            <th class="text-center">Show</th>
+                            <th class="text-center">Time</th>
+                            <th class="text-center">Location</th>
+                            <th class="text-center">Show Detail</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -463,9 +463,9 @@
                             <td style="background-color: transparent;">
                                 <div class="show-name">{{ $event->name }}</div>
                             </td>
-                            <td style="background-color: transparent;"><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
-                            <td style="background-color: transparent;"><span class="show-location">{{ $event->location }}</span></td>
-                            <td style="background-color: transparent;">
+                            <td style="background-color: transparent;" class="text-center"><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
+                            <td style="background-color: transparent;" class="text-center"><span class="show-location">{{ $event->location }}</span></td>
+                            <td style="background-color: transparent;" class="text-center">
                                 @if($isPast)
                                     <span class="badge-done">Done</span>
                                 @else

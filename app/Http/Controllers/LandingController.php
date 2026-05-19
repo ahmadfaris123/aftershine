@@ -29,8 +29,12 @@ class LandingController extends Controller
         // Get all active songs ordered by display_order (latest first if you want newest songs first)
         $songs = Song::active()->ordered()->limit(8)->get();
 
-        // Get all active events ordered by display_order
-        $events = Event::active()->ordered()->get();
+        // Get all active events for this month ordered by date
+        $events = Event::active()
+            ->whereMonth('date', now()->month)
+            ->whereYear('date', now()->year)
+            ->orderBy('date', 'asc')
+            ->get();
 
         // Get all active awards ordered by display_order
         $awards = Award::active()->ordered()->get();

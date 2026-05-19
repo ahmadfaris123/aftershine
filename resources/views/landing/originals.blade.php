@@ -165,21 +165,23 @@
                 <!-- Card 1 -->
                 @forelse($songs as $song)
                 <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="200">
-                    <a href="{{ $song->youtube_url }}" class="popup-youtube d-block text-decoration-none h-100">
+                    @php
+                        $ytUrl = $song->youtube_url ?? '';
+                        $ytId = '';
+                        if (preg_match('/youtu\.be\/([^?&\/]+)/', $ytUrl, $m)) {
+                            $ytId = $m[1];
+                        } elseif (preg_match('/[?&]v=([^&]+)/', $ytUrl, $m)) {
+                            $ytId = $m[1];
+                        }
+                        
+                        $cleanYtUrl = $ytId ? "https://www.youtube.com/watch?v={$ytId}" : $ytUrl;
+                        $thumbSrc = $ytId
+                            ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg"
+                            : "https://img.youtube.com/hqdefault.jpg";
+                    @endphp
+                    <a href="{{ $cleanYtUrl }}" class="popup-youtube d-block text-decoration-none h-100">
                         <div class="bg-dark h-100 d-flex flex-column border-0 video-card" style="cursor: pointer;">
                             <div class="position-relative overflow-hidden">
-                                @php
-                                    $ytUrl = $song->youtube_url ?? '';
-                                    $ytId = '';
-                                    if (preg_match('/youtu\.be\/([^?&\/]+)/', $ytUrl, $m)) {
-                                        $ytId = $m[1];
-                                    } elseif (preg_match('/[?&]v=([^&]+)/', $ytUrl, $m)) {
-                                        $ytId = $m[1];
-                                    }
-                                    $thumbSrc = $ytId
-                                        ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg"
-                                        : Storage::url($song->thumbnail_path);
-                                @endphp
                                 <img src="{{ $thumbSrc }}" alt="{{ $song->title }}" class="w-100" style="aspect-ratio: 16/9; object-fit: cover;">
                                 <div class="play-btn position-absolute top-50 start-50 translate-middle bg-white rounded-circle flex-center" style="width: 48px; height: 48px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                                     <i class="ph-fill ph-play" style="font-size: 24px; color: #0f172a; margin-left: 4px;"></i>

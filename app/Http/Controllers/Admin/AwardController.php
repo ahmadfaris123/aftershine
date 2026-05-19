@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Award;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class AwardController extends Controller
 {
@@ -51,11 +52,20 @@ class AwardController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
 
-                // Generate nama file unik
-                $fileName = 'award_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+                // Generate nama file unik (selalu simpan sebagai webp)
+                $fileName = 'award_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/awards');
 
-                // Simpan ke storage/app/public/awards
-                $path = $image->storeAs('awards', $fileName, 'public');
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($image)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $path = 'awards/' . $fileName;
 
                 // Simpan data ke database
                 Award::create([
@@ -109,12 +119,21 @@ class AwardController extends Controller
                     Storage::disk('public')->delete($award->image_path);
                 }
 
-                // Upload gambar baru
+                // Upload gambar baru (selalu simpan sebagai webp)
                 $image = $request->file('image');
-                $fileName = 'award_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('awards', $fileName, 'public');
+                $fileName = 'award_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/awards');
 
-                $validated['image_path'] = $path;
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($image)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $validated['image_path'] = 'awards/' . $fileName;
             }
 
             // Update data

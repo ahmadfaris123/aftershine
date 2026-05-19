@@ -419,6 +419,27 @@
                 background: #ffffff;
                 color: #000000;
             }
+            .event-past td {
+                opacity: 0.35;
+            }
+            .event-past .show-name,
+            .event-past .show-time,
+            .event-past .show-location {
+                color: #64748b !important;
+            }
+            .badge-done {
+                font-size: 10px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #64748b;
+                border: 1.5px solid #475569;
+                border-radius: 50px;
+                padding: 4px 12px;
+                background: transparent;
+                white-space: nowrap;
+                display: inline-block;
+            }
         </style>
         <div class="container">
             <div class="section-heading text-center mb-48">
@@ -437,13 +458,20 @@
                     </thead>
                     <tbody>
                         @forelse($events as $event)
-                        <tr style="background-color: transparent;">
+                        @php $isPast = $event->date && \Carbon\Carbon::parse($event->date)->startOfDay()->isPast(); @endphp
+                        <tr style="background-color: transparent;" class="{{ $isPast ? 'event-past' : '' }}">
                             <td style="background-color: transparent;">
-                                <div class="show-name" >{{ $event->name }}</div>
+                                <div class="show-name">{{ $event->name }}</div>
                             </td>
                             <td style="background-color: transparent;"><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
                             <td style="background-color: transparent;"><span class="show-location">{{ $event->location }}</span></td>
-                            <td style="background-color: transparent;"><a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a></td>
+                            <td style="background-color: transparent;">
+                                @if($isPast)
+                                    <span class="badge-done">Done</span>
+                                @else
+                                    <a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a>
+                                @endif
+                            </td>
                         </tr>
                         @empty
                             <tr style="background-color: transparent;">

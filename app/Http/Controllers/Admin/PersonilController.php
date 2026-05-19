@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Personil;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class PersonilController extends Controller
 {
@@ -58,11 +59,20 @@ class PersonilController extends Controller
             if ($request->hasFile('photo')) {
                 $photo = $request->file('photo');
 
-                // Generate nama file unik
-                $fileName = 'personil_' . time() . '_' . Str::random(10) . '.' . $photo->getClientOriginalExtension();
+                // Generate nama file unik (selalu simpan sebagai webp)
+                $fileName = 'personil_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/personils');
 
-                // Simpan ke storage/app/public/personils
-                $path = $photo->storeAs('personils', $fileName, 'public');
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($photo)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $path = 'personils/' . $fileName;
 
                 // Simpan data ke database
                 Personil::create([
@@ -127,12 +137,21 @@ class PersonilController extends Controller
                     Storage::disk('public')->delete($personil->photo_path);
                 }
 
-                // Upload foto baru
+                // Upload foto baru (selalu simpan sebagai webp)
                 $photo = $request->file('photo');
-                $fileName = 'personil_' . time() . '_' . Str::random(10) . '.' . $photo->getClientOriginalExtension();
-                $path = $photo->storeAs('personils', $fileName, 'public');
+                $fileName = 'personil_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/personils');
 
-                $validated['photo_path'] = $path;
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($photo)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $validated['photo_path'] = 'personils/' . $fileName;
             }
 
             // Update data

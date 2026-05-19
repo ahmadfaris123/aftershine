@@ -57,12 +57,20 @@
                         @csrf
                         <div class="row">
                             {{-- Name --}}
-                            <div class="col-md-12 mb-20">
+                            <div class="col-md-8 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Nama Event <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" name="name" class="form-control radius-8"
                                     placeholder="Masukkan nama event" required>
+                            </div>
+
+                            {{-- Date --}}
+                            <div class="col-md-4 mb-20">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Tanggal Event <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" name="date" class="form-control radius-8" required>
                             </div>
 
                             {{-- Display Order --}}
@@ -156,6 +164,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nama Event</th>
+                                        <th scope="col">Tanggal</th>
                                         <th scope="col">Keterangan</th>
                                         <!-- <th scope="col">Urutan</th> -->
                                         <th scope="col">Status</th>
@@ -166,6 +175,13 @@
                                     @foreach($events as $event)
                                         <tr>
                                             <td class="fw-semibold text-primary-600">{{ $event->name }}</td>
+                                            <td>
+                                                @if($event->date)
+                                                    <span class="text-sm">{{ \Carbon\Carbon::parse($event->date)->isoFormat('D MMM Y') }}</span>
+                                                @else
+                                                    <span class="text-sm text-muted fst-italic">-</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if($event->description)
                                                     <span class="text-sm text-secondary-light">{{ Str::limit($event->description, 100) }}</span>
@@ -233,11 +249,16 @@
                                                         @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col-md-12 mb-3">
+                                                                <div class="col-md-8 mb-3">
                                                                     <label class="form-label">Nama Event <span
                                                                             class="text-danger">*</span></label>
                                                                     <input type="text" name="name" class="form-control"
                                                                         value="{{ $event->name }}" required>
+                                                                </div>
+                                                                <div class="col-md-4 mb-3">
+                                                                    <label class="form-label">Tanggal Event <span class="text-danger">*</span></label>
+                                                                    <input type="date" name="date" class="form-control"
+                                                                        value="{{ $event->date ? \Carbon\Carbon::parse($event->date)->format('Y-m-d') : '' }}" required>
                                                                 </div>
                                                                 <!-- <div class="col-md-6 mb-3">
                                                                     <label class="form-label">Urutan Tampil</label>

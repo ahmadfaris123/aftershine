@@ -27,7 +27,7 @@ class LandingController extends Controller
         $personils = Personil::active()->ordered()->get();
 
         // Get all active songs ordered by display_order (latest first if you want newest songs first)
-        $songs = Song::active()->ordered()->get();
+        $songs = Song::active()->ordered()->limit(8)->get();
 
         // Get all active events ordered by display_order
         $events = Event::active()->ordered()->get();

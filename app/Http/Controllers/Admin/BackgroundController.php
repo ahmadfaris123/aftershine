@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Background;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class BackgroundController extends Controller
 {
@@ -45,11 +46,20 @@ class BackgroundController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
 
-                // Generate nama file unik
-                $fileName = 'background_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+                // Generate nama file unik (selalu simpan sebagai webp)
+                $fileName = 'background_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/backgrounds');
 
-                // Simpan ke storage/app/public/backgrounds
-                $path = $image->storeAs('backgrounds', $fileName, 'public');
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($image)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $path = 'backgrounds/' . $fileName;
 
                 // Simpan data ke database
                 \App\Models\Background::create([
@@ -94,12 +104,21 @@ class BackgroundController extends Controller
                     Storage::disk('public')->delete($background->image_path);
                 }
 
-                // Upload gambar baru
+                // Upload gambar baru (selalu simpan sebagai webp)
                 $image = $request->file('image');
-                $fileName = 'background_' . time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('backgrounds', $fileName, 'public');
+                $fileName = 'background_' . time() . '_' . Str::random(10) . '.webp';
+                $storagePath = storage_path('app/public/backgrounds');
 
-                $validated['image_path'] = $path;
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+
+                // Kompres gambar dengan quality 75% tanpa mengubah resolusi
+                Image::read($image)
+                    ->toWebp(quality: 75)
+                    ->save($storagePath . '/' . $fileName);
+
+                $validated['image_path'] = 'backgrounds/' . $fileName;
             }
 
             // Update data

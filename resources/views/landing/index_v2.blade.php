@@ -207,7 +207,7 @@
 
     <section class="image-separator py-60" style="background-color: #000000;">
       <div class="container-fluid px-0" data-aos="fade-up" data-aos-duration="500">
-        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover" style="filter: brightness(0.8);">
+        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-8-white.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover" style="filter: brightness(0.8);">
       </div>
     </section>
 

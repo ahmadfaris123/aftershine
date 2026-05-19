@@ -57,7 +57,7 @@
                         @csrf
                         <div class="row">
                             {{-- Name --}}
-                            <div class="col-md-8 mb-20">
+                            <div class="col-md-6 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Nama Event <span class="text-danger">*</span>
                                 </label>
@@ -65,8 +65,17 @@
                                     placeholder="Masukkan nama event" required>
                             </div>
 
+                            {{-- Location --}}
+                            <div class="col-md-3 mb-20">
+                                <label class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                    Lokasi <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="location" class="form-control radius-8"
+                                    placeholder="Contoh: Jakarta" required>
+                            </div>
+
                             {{-- Date --}}
-                            <div class="col-md-4 mb-20">
+                            <div class="col-md-3 mb-20">
                                 <label class="form-label fw-semibold text-primary-light text-sm mb-8">
                                     Tanggal Event <span class="text-danger">*</span>
                                 </label>
@@ -165,6 +174,7 @@
                                     <tr>
                                         <th scope="col">Nama Event</th>
                                         <th scope="col">Tanggal</th>
+                                        <th scope="col">Lokasi</th>
                                         <th scope="col">Keterangan</th>
                                         <!-- <th scope="col">Urutan</th> -->
                                         <th scope="col">Status</th>
@@ -181,6 +191,9 @@
                                                 @else
                                                     <span class="text-sm text-muted fst-italic">-</span>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <span class="text-sm fw-medium text-primary-600">{{ $event->location ?? '-' }}</span>
                                             </td>
                                             <td>
                                                 @if($event->description)
@@ -249,13 +262,18 @@
                                                         @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col-md-8 mb-3">
+                                                                <div class="col-md-6 mb-3">
                                                                     <label class="form-label">Nama Event <span
                                                                             class="text-danger">*</span></label>
                                                                     <input type="text" name="name" class="form-control"
                                                                         value="{{ $event->name }}" required>
                                                                 </div>
-                                                                <div class="col-md-4 mb-3">
+                                                                <div class="col-md-3 mb-3">
+                                                                    <label class="form-label">Lokasi <span class="text-danger">*</span></label>
+                                                                    <input type="text" name="location" class="form-control"
+                                                                        value="{{ $event->location }}" required>
+                                                                </div>
+                                                                <div class="col-md-3 mb-3">
                                                                     <label class="form-label">Tanggal Event <span class="text-danger">*</span></label>
                                                                     <input type="date" name="date" class="form-control"
                                                                         value="{{ $event->date ? \Carbon\Carbon::parse($event->date)->format('Y-m-d') : '' }}" required>

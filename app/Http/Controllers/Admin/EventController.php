@@ -32,6 +32,7 @@ class EventController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
+            'location' => 'required|string|max:255',
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
             // 'display_order' => 'nullable|integer',
@@ -40,6 +41,7 @@ class EventController extends Controller
             'name.required' => 'Nama event wajib diisi',
             'date.required' => 'Tanggal event wajib diisi',
             'date.date' => 'Format tanggal event tidak valid',
+            'location.required' => 'Lokasi event wajib diisi',
             // 'image.image' => 'File harus berupa gambar',
             // 'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
             // 'image.max' => 'Ukuran gambar maksimal 5MB'
@@ -63,6 +65,7 @@ class EventController extends Controller
             Event::create([
                 'name' => $validated['name'],
                 'date' => $validated['date'],
+                'location' => $validated['location'],
                 // 'image_path' => $path,
                 'description' => $validated['description'] ?? null,
                 // 'display_order' => $validated['display_order'] ?? 0,
@@ -87,6 +90,7 @@ class EventController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
+            'location' => 'required|string|max:255',
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
             // 'display_order' => 'nullable|integer',
@@ -95,6 +99,7 @@ class EventController extends Controller
             'name.required' => 'Nama event wajib diisi',
             'date.required' => 'Tanggal event wajib diisi',
             'date.date' => 'Format tanggal event tidak valid',
+            'location.required' => 'Lokasi event wajib diisi',
             // 'image.image' => 'File harus berupa gambar',
             // 'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau webp',
             // 'image.max' => 'Ukuran gambar maksimal 5MB'

@@ -300,7 +300,7 @@
                     <span style="color: #cbd5e1; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 8px;">Dari Youtube</span>
                     <h2 class="mb-0" style="font-weight: 900; font-size: 32px; color: #ffffff; text-transform: uppercase; letter-spacing: -0.5px;">Video Lainnya</h2>
                 </div>
-                <a href="https://www.youtube.com/@AFTERSHINE/videos" target="_blank" class="btn rounded-pill btn-outline-white flex-align gap-8 fw-bold transition-2 text-white" style="background-color: #111111; color: #ffffff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
+                <a href="https://www.youtube.com/@AFTERSHINE" target="_blank" class="btn rounded-pill btn-outline-white flex-align gap-8 fw-bold transition-2 text-white" style="background-color: #111111; color: #ffffff; padding: 12px 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
                     Tonton di Youtube <i class="ph-bold ph-caret-right text-lg"></i>
                 </a>
             </div>
@@ -366,15 +366,18 @@
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
                 color: #ffffff;
-                padding: 0 16px 20px 0;
+                padding: 0 16px 20px 16px;
                 border: none;
                 white-space: nowrap;
+                text-align: center;
+                vertical-align: middle;
             }
             .events-table tbody td {
-                padding: 20px 16px 20px 0;
+                padding: 20px 16px;
                 border: none;
                 border-top: 1px solid #334155;
                 vertical-align: middle;
+                text-align: center;
             }
             .events-table tbody tr:first-child td {
                 border-top: 1px solid #334155;
@@ -460,7 +463,7 @@
                         @forelse($events as $event)
                         @php $isPast = $event->date && \Carbon\Carbon::parse($event->date)->startOfDay()->isPast(); @endphp
                         <tr style="background-color: transparent;" class="{{ $isPast ? 'event-past' : '' }}">
-                            <td style="background-color: transparent;">
+                            <td style="background-color: transparent;" class="text-center">
                                 <div class="show-name">{{ $event->name }}</div>
                             </td>
                             <td style="background-color: transparent;" class="text-center"><span class="show-time">{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</span></td>
@@ -629,12 +632,13 @@
                                     </div>
                                 @endif
 
-                                @if(isset($settings->twitter_url))
+                                @if(isset($settings->instagram_url))
                                     <div class="flex-align gap-20 mb-24">
-                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>
+                                        <span class="icon d-flex text-32 text-main-600"><i
+                                                class="ph-bold ph-instagram-logo text-white"></i></span>
                                         <div class="">
-                                            <a href="{{ $settings->twitter_url }}" target="_blank"
-                                                class="text-white d-block hover-text-main-600 mb-4">X (Twitter)</a>
+                                            <a href="{{ $settings->instagram_url }}" target="_blank"
+                                                class="text-white d-block hover-text-main-600 mb-4">Instagram</a>
                                         </div>
                                     </div>
                                 @endif
@@ -646,17 +650,6 @@
                         <div class="col" data-aos="fade-up" data-aos-duration="800">
                             <div class="footer-item">
                                 <h4 class="footer-item__title mb-32"><br></h4>
-                                @if(isset($settings->instagram_url))
-                                    <div class="flex-align gap-20 mb-24">
-                                        <span class="icon d-flex text-32 text-main-600"><i
-                                                class="ph-bold ph-instagram-logo text-white"></i></span>
-                                        <div class="">
-                                            <a href="{{ $settings->instagram_url }}" target="_blank"
-                                                class="text-white d-block hover-text-main-600 mb-4">Instagram</a>
-                                        </div>
-                                    </div>
-                                @endif
-
                                 @if(isset($settings->tiktok_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i
@@ -664,6 +657,16 @@
                                         <div class="">
                                             <a href="{{ $settings->tiktok_url }}" target="_blank"
                                                 class="text-white d-block hover-text-main-600 mb-4">TikTok</a>
+                                        </div>
+                                    </div>
+                                @endif
+                                
+                                @if(isset($settings->twitter_url))
+                                    <div class="flex-align gap-20 mb-24">
+                                        <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>
+                                        <div class="">
+                                            <a href="{{ $settings->twitter_url }}" target="_blank"
+                                                class="text-white d-block hover-text-main-600 mb-4">X (Twitter)</a>
                                         </div>
                                     </div>
                                 @endif

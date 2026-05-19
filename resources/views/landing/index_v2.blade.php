@@ -113,6 +113,9 @@
               <li class="nav-item">
                 <a class="nav-link text-white transition-1" href="#awards">Awards</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link text-white transition-1" href="#contact_us">Contact Us</a>
+              </li>
             </ul>
           </div>
           <div class="d-none d-lg-flex align-items-center gap-3">
@@ -445,8 +448,8 @@
             }
         </style>
         <div class="container">
-            <div class="section-heading text-center mb-48">
-                <h2 class="wow bounceIn" style="color: #ffb83c">Events</h2>
+            <div class="section-heading text-center">
+                <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-9.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
             </div>
 
             <div class="table-responsive" data-aos="fade-up">
@@ -531,8 +534,8 @@
             }
         </style>
         <div class="container">
-            <div class="section-heading text-center mb-40">
-                <h2 class="wow bounceIn" style="color: #ffb83c">Awards</h2>
+            <div class="section-heading text-center">
+                <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-10.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
             </div>
 
             <div class="award-slider px-12">
@@ -568,7 +571,7 @@
     </section>
 
     <!-- ==================== Footer Start Here ==================== -->
-    <footer class="footer position-relative z-1">
+    <footer id="contact_us" class="footer position-relative z-1">
         <!-- <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
             class="shape four animation-scalation visible-mobile-devices">
         <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
@@ -660,7 +663,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                
+
                                 @if(isset($settings->twitter_url))
                                     <div class="flex-align gap-20 mb-24">
                                         <span class="icon d-flex text-32 text-main-600"><i class="ph-bold ph-x-logo text-white"></i></span>

@@ -469,7 +469,7 @@
                                 @if($isPast)
                                     <span class="badge-done">Done</span>
                                 @else
-                                    <a href="{{ $event->url }}" target="_blank" class="btn-more-info">More Info</a>
+                                    <a href="https://www.instagram.com/aftershine.official?utm_source=ig_web_button_share_sheet" target="_blank" class="btn-more-info">More Info</a>
                                 @endif
                             </td>
                         </tr>

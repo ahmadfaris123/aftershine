@@ -68,8 +68,8 @@ class PersonilController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::read($photo)
-                    ->toWebp(quality: 75)
+                Image::decode($photo->path())
+                    ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 
                 $path = 'personils/' . $fileName;
@@ -147,8 +147,8 @@ class PersonilController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::read($photo)
-                    ->toWebp(quality: 75)
+                Image::decode($photo->path())
+                    ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 
                 $validated['photo_path'] = 'personils/' . $fileName;

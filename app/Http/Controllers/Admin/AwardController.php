@@ -61,8 +61,8 @@ class AwardController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::read($image)
-                    ->toWebp(quality: 75)
+                Image::decode($image->path())
+                    ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 
                 $path = 'awards/' . $fileName;
@@ -129,8 +129,8 @@ class AwardController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::read($image)
-                    ->toWebp(quality: 75)
+                Image::decode($image->path())
+                    ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 
                 $validated['image_path'] = 'awards/' . $fileName;

@@ -15,9 +15,9 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Administrator',
-            'username' => 'admin',
+            'username' => 'aftershine',
             'email' => 'admin@aftershine.com',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('webaftershine2026'),
         ]);
     }
 }

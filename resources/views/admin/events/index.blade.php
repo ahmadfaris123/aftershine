@@ -36,8 +36,7 @@
         <div class="card-body">
             <div class="d-flex align-items-center">
                 <iconify-icon icon="mdi:calendar-star" class="text-primary text-2xl me-2"></iconify-icon>
-                <span class="fw-semibold">Kelola daftar event dengan gambar dan keterangan. Upload gambar dengan rasio 16:9
-                    untuk hasil terbaik.</span>
+                <span class="fw-semibold">Kelola daftar event dengan gambar dan keterangan.</span>
             </div>
         </div>
     </div>

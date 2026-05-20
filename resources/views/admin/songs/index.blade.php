@@ -36,8 +36,7 @@
         <div class="card-body">
             <div class="d-flex align-items-center">
                 <iconify-icon icon="mdi:music-note" class="text-primary text-2xl me-2"></iconify-icon>
-                <span class="fw-semibold">Kelola daftar lagu dengan informasi lengkap termasuk link YouTube. Upload
-                    thumbnail dengan rasio 16:9 untuk hasil terbaik.</span>
+                <span class="fw-semibold">Kelola daftar lagu dengan informasi lengkap termasuk link YouTube.</span>
             </div>
         </div>
     </div>

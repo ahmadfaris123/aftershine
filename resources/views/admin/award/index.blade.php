@@ -37,7 +37,7 @@
             <div class="d-flex align-items-center">
                 <iconify-icon icon="mdi:trophy" class="text-warning text-2xl me-2"></iconify-icon>
                 <span class="fw-semibold">Kelola daftar penghargaan/award yang pernah diraih. Upload gambar dengan rasio
-                    16:9 untuk hasil terbaik.</span>
+                    1:1 untuk hasil terbaik.</span>
             </div>
         </div>
     </div>

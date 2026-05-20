@@ -56,6 +56,15 @@
       .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; background-color: #ffb83c; transition: all 0.3s ease; transform: translateX(-50%); }
       .nav-link:hover::after { width: 100%; }
       .nav-link:hover { color: #ffb83c !important; }
+      .banner-img {
+        height: 80vh;
+        background-color: #000000;
+      }
+      @media (max-width: 768px) {
+        .banner-img {
+          height: 40vh;
+        }
+      }
     </style>
 </head>
 
@@ -132,11 +141,11 @@
           <div class="carousel-inner">
             @forelse($activeBackground as $item)
             <div class="carousel-item @if($item->is_active) active @endif">
-              <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #000000;">
+              <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block w-100 object-fit-cover banner-img" alt="Banner 2">
             </div>
             @empty
             <div class="carousel-item active">
-              <img src="{{ asset('assets/landing_v2/images/AFTERSHINE_MAIN LOGO_BLACK.png') }}" class="d-block w-100 object-fit-cover" alt="Banner 2" style="height: 80vh; background-color: #000000;">
+              <img src="{{ asset('assets/landing_v2/images/AFTERSHINE_MAIN LOGO_BLACK.png') }}" class="d-block w-100 object-fit-cover banner-img" alt="Banner 2">
             </div>
             @endforelse
           </div>
@@ -153,18 +162,14 @@
     <!-- ========================== Brand Section End =========================== -->
 
     <!-- ============================= Features Section Start ============================== -->
-    <section
-      id="profile"
-      class="choose-us pt-120 position-relative z-1"
-      style="background-color: #000000;"
-    >
+    <section id="profile" class="choose-us pt-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/abous_us.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
       <div class="container">
         <div class="row gy-5 align-items-center">
           <!-- Gambar di bagian kiri -->
           <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1200">
             <div class="position-relative d-inline-block">
-              <img src="{{ asset('assets/landing_v2/images/8.png') }}" alt="Aftershine" class="img-fluid rounded-16">
-                  <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-3.png') }}" alt="Logogram" class="position-absolute" style="top: 0; left: 0; transform: translate(-45%, -45%); width: 150px; z-index: 2;">
+              <img src="{{ asset('assets/landing_v2/images/8.png') }}" alt="Aftershine" class="img-fluid rounded-16" style="width: 550px; z-index: 2;">
+              <!-- <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-3.png') }}" alt="Logogram" class="position-absolute" style="top: 0; left: 0; transform: translate(-45%, -45%); width: 150px; z-index: 2;"> -->
             </div>
           </div>
           <!-- Teks di bagian kanan -->
@@ -215,7 +220,7 @@
     </section>
 
     <!-- ================================= testimonials Section Start ========================================= -->
-    <section id="personel" class="testimonials py-120 position-relative z-1">
+    <section id="personel" class="testimonials py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/the_personel.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="container">
 
             <div class="section-heading text-center">
@@ -361,7 +366,7 @@
     <!-- ================================= Blog Section End ========================================= -->
 
     <!-- ================================= testimonials Section Start ========================================= -->
-    <section id="events" class="py-120 position-relative z-1" style="background-color: #000000;">
+    <section id="events" class="py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/event.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <style>
             .events-table thead th {
                 font-size: 11px;
@@ -494,7 +499,7 @@
     <!-- ================================= testimonials Section Start ========================================= -->
 
     <!-- ================================= Blog Section Start ========================================= -->
-    <section id="awards" class="py-120 bg-dark position-relative" style="background-color: #050505 !important;">
+    <section id="awards" class="py-120 bg-dark position-relative" style="background-image: url('{{ asset('assets/landing_v2/images/bg/merchant.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <style>
             .award-card {
                 position: relative;
@@ -570,8 +575,66 @@
         </div>
     </section>
 
+    <!-- ==================== Merchant Start Here ==================== -->
+     <section id="merchant" class="testimonials py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/awards.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+        <div class="container">
+
+            <div class="section-heading text-center">
+                <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE-11.png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
+            </div>
+
+            <div class="merchant-slider">
+                <div class="section-heading text-center">
+                    <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE (5).png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
+                </div>
+                <!-- @forelse($personils as $personil)
+                    <div class="px-12" data-aos="fade-up" data-aos-duration="200">
+                        <div class="overflow-hidden mb-24">
+                            <img src="{{ asset('storage/' . $personil->photo_path) }}"
+                                class="w-100" style="aspect-ratio: 1/1; object-fit: cover;">
+                        </div>
+                        <div class="text-start">
+                            <h4 class="mb-12" style="color: #ffffff; font-weight: 700;">{{ $personil->name }}</h4>
+                            <p class="mb-8" style="color: #cbd5e1; font-size: 14px;">{{ $personil->position }}</p>
+                            <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->phone }}</p>
+                            
+                            <div class="d-flex gap-16">
+                                @if($personil->instagram_url)
+                                    <a href="{{ $personil->instagram_url }}" target="_blank" class="text-white transition-1 text-xl">
+                                        <i class="ph-bold ph-instagram-logo"></i>
+                                    </a>
+                                @endif
+                                @if($personil->tiktok_url)
+                                    <a href="{{ $personil->tiktok_url }}" target="_blank" class="text-white transition-1 text-xl">
+                                        <i class="ph-bold ph-tiktok-logo"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="text-center p-5 w-100">
+                        <p>Belum ada Merchant yang ditambahkan.</p>
+                    </div>
+                @endforelse -->
+            </div>
+
+            <!-- <div class="flex-center gap-16 mt-40">
+                <button type="button" id="merchant-prev"
+                    class="slick-prev slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <button type="button" id="merchant-next"
+                    class="slick-next slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
+                    <i class="ph ph-caret-right"></i>
+                </button>
+            </div> -->
+        </div>
+    </section>
+    <!-- ==================== Merchant end ==================== -->
+
     <!-- ==================== Footer Start Here ==================== -->
-    <footer id="contact_us" class="footer position-relative z-1">
+    <footer id="contact_us" class="footer position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/contact_us.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <!-- <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""
             class="shape four animation-scalation visible-mobile-devices">
         <img src="{{ asset('assets/landing_v2/images/shapes/shape_after_light.png') }}" alt=""

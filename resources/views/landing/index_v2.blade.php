@@ -123,6 +123,9 @@
                 <a class="nav-link text-white transition-1" href="#awards">Awards</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link text-white transition-1" href="#merchant">Merchant</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link text-white transition-1" href="#contact_us">Contact Us</a>
               </li>
             </ul>

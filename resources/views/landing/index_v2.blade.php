@@ -760,6 +760,91 @@
     </footer>
     <!-- ==================== Footer End Here ==================== -->
 
+    <!-- ==================== Floating Spotify Start ==================== -->
+    <div class="floating-spotify shadow-lg">
+        <div class="spotify-header collapsed" id="spotifyHeader">
+            <div class="d-flex align-items-center gap-2">
+                <i class="ph-fill ph-spotify-logo text-white" style="font-size: 24px;"></i>
+                <span class="text-white fw-bold" style="font-size: 14px;">Listen on Spotify</span>
+            </div>
+            <button id="toggleSpotify" class="btn btn-sm text-white p-0 border-0 shadow-none">
+                <i class="ph ph-caret-up text-white" id="spotifyIcon" style="font-size: 18px;"></i>
+            </button>
+        </div>
+        <div class="spotify-body collapsed" id="spotifyBody">
+            <!-- Ganti src iframe dibawah dengan link embed spotify yang diinginkan -->
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6daEl3JyMDgK52fKuqPelL?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <style>
+        .floating-spotify {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 340px;
+            background-color: #000000;
+            border-radius: 16px;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        .spotify-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            background-color: #000000; /* Spotify Green */
+            border-radius: 15px 15px 0 0;
+            transition: all 0.3s ease;
+        }
+        .spotify-header.collapsed {
+            border-radius: 15px;
+        }
+        .spotify-body {
+            padding: 12px;
+            transition: max-height 0.3s ease-out, padding 0.3s ease, opacity 0.3s ease;
+            max-height: 200px;
+            opacity: 1;
+            overflow: hidden;
+        }
+        .spotify-body.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+        }
+        @media (max-width: 768px) {
+            .floating-spotify {
+                width: calc(100% - 40px);
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const spotifyHeader = document.getElementById('spotifyHeader');
+            const spotifyBody = document.getElementById('spotifyBody');
+            const spotifyIcon = document.getElementById('spotifyIcon');
+
+            spotifyHeader.addEventListener('click', function() {
+                spotifyBody.classList.toggle('collapsed');
+                spotifyHeader.classList.toggle('collapsed');
+                if (spotifyBody.classList.contains('collapsed')) {
+                    spotifyIcon.classList.remove('ph-caret-down');
+                    spotifyIcon.classList.add('ph-caret-up');
+                } else {
+                    spotifyIcon.classList.remove('ph-caret-up');
+                    spotifyIcon.classList.add('ph-caret-down');
+                }
+            });
+        });
+    </script>
+    <!-- ==================== Floating Spotify End ==================== -->
 
     <!-- Jquery js -->
     <!-- <script src="assets/landing_v2/js/jquery-3.7.1.min.js"></script> -->

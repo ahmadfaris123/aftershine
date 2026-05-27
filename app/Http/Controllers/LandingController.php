@@ -9,6 +9,7 @@ use App\Models\Personil;
 use App\Models\Song;
 use App\Models\Event;
 use App\Models\Award;
+use App\Models\SpotifyAlbum;
 
 class LandingController extends Controller
 {
@@ -39,6 +40,11 @@ class LandingController extends Controller
         // Get all active awards ordered by display_order
         $awards = Award::active()->ordered()->get();
 
+        // Get all active Spotify albums with their active tracks
+        $albums = SpotifyAlbum::active()->ordered()->with(['tracks' => function ($q) {
+            $q->where('is_active', true)->orderBy('display_order');
+        }])->get();
+
         $data = [
             'activeBackground' => $activeBackground,
             'settings' => $settings,
@@ -46,6 +52,7 @@ class LandingController extends Controller
             'songs' => $songs,
             'events' => $events,
             'awards' => $awards,
+            'albums' => $albums,
         ];
 
         return view('landing.index_v2', $data);

@@ -26,8 +26,14 @@
       </li>
       <li>
         <a href="{{ route('songs.index') }}">
-          <iconify-icon icon="mdi:music-note" class="menu-icon"></iconify-icon>
-          <span>Songs</span>
+          <iconify-icon icon="mdi:youtube" class="menu-icon"></iconify-icon>
+          <span>Youtube Video</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('spotify.index') }}">
+          <iconify-icon icon="mdi:spotify" class="menu-icon"></iconify-icon>
+          <span>Spotify Music</span>
         </a>
       </li>
       <li>

@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Personil;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PersonilController extends Controller
 {
@@ -68,7 +69,8 @@ class PersonilController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::decode($photo->path())
+                $manager = new ImageManager(new Driver());
+                $manager->decode($photo->path())
                     ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 
@@ -147,7 +149,8 @@ class PersonilController extends Controller
                 }
 
                 // Kompres gambar dengan quality 75% tanpa mengubah resolusi
-                Image::decode($photo->path())
+                $manager = new ImageManager(new Driver());
+                $manager->decode($photo->path())
                     ->encode(new \Intervention\Image\Encoders\WebpEncoder(quality: 75))
                     ->save($storagePath . '/' . $fileName);
 

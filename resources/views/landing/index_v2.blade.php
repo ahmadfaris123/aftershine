@@ -368,7 +368,396 @@
         </div>
     </section>
     <!-- ================================= Blog Section End ========================================= -->
+    <section id="albums" class="py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/event.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+        <style>
+            .album-card {
+                cursor: pointer;
+                border-radius: 12px;
+                overflow: hidden;
+                position: relative;
+                transition: transform 0.35s ease, box-shadow 0.35s ease;
+            }
+            .album-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+            }
+            .album-card__cover {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                display: block;
+                border-radius: 12px;
+                filter: brightness(0.82);
+                transition: filter 0.35s ease;
+            }
+            .album-card:hover .album-card__cover { filter: brightness(0.55); }
+            .album-card__no-cover {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                background: #1a1a1a;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .album-card__overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%);
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 18px 14px 16px;
+            }
+            .album-card__play-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -60%);
+                opacity: 0;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                font-size: 44px;
+                color: #ffb83c;
+                filter: drop-shadow(0 2px 10px rgba(0,0,0,0.8));
+            }
+            .album-card:hover .album-card__play-icon {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+            .album-card__name {
+                font-family: "Open Sans", sans-serif;
+                font-size: 15px;
+                font-weight: 700;
+                color: #ffffff;
+                text-align: center;
+                letter-spacing: 0.4px;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+                line-height: 1.3;
+            }
+            .album-card__count {
+                font-size: 11px;
+                color: #ffb83c;
+                text-align: center;
+                margin-top: 5px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+            /* Modal Styling */
+            #albumDetailModal .modal-content {
+                background-color: #111111;
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 16px;
+                color: #ffffff;
+            }
+            #albumDetailModal .modal-header {
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                padding: 24px 24px 20px;
+                display: flex;
+                flex-direction: column;
+            }
+            @media (min-width: 576px) {
+                #albumDetailModal .modal-header {
+                    flex-direction: row;
+                    align-items: flex-start;
+                }
+            }
+            #albumDetailModal .modal-body { padding: 0 24px 24px; }
+            #albumDetailModal .album-modal-cover {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 10px;
+                flex-shrink: 0;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+                margin-bottom: 16px;
+            }
+            @media (min-width: 576px) {
+                #albumDetailModal .album-modal-cover {
+                    width: 110px;
+                    height: 110px;
+                    margin-bottom: 0;
+                    margin-right: 20px;
+                }
+            }
+            #albumDetailModal .album-modal-title {
+                font-family: "Open Sans", sans-serif;
+                font-size: 20px;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 6px;
+                line-height: 1.3;
+            }
+            #albumDetailModal .album-modal-desc {
+                font-size: 13px;
+                color: #94a3b8;
+                line-height: 1.6;
+                margin-bottom: 0;
+            }
+            #albumDetailModal .album-modal-badge {
+                display: inline-block;
+                background: rgba(255,184,60,0.15);
+                color: #ffb83c;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                padding: 3px 12px;
+                border-radius: 20px;
+                margin-top: 10px;
+            }
+            .album-tracks-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+            .album-tracks-table thead th {
+                font-size: 10px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #475569;
+                padding: 0 12px 12px 12px;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            .album-tracks-table thead th:last-child { text-align: center; }
+            .album-tracks-table tbody tr {
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+                transition: background 0.2s;
+            }
+            .album-tracks-table tbody tr:last-child { border-bottom: none; }
+            .album-tracks-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+            .album-tracks-table tbody td {
+                padding: 11px 12px;
+                font-size: 13px;
+                color: #e2e8f0;
+                vertical-align: middle;
+            }
+            .album-tracks-table .t-num { color: #475569; font-size: 12px; width: 32px; }
+            .album-tracks-table .t-title { font-weight: 600; color: #f1f5f9; }
+            .album-tracks-table .t-artist { color: #94a3b8; font-size: 12px; }
+            .album-tracks-table .t-link { text-align: center; }
+            .btn-spotify-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                background: #1DB954;
+                color: #ffffff !important;
+                font-size: 11px;
+                font-weight: 700;
+                padding: 5px 14px;
+                border-radius: 20px;
+                text-decoration: none;
+                transition: background 0.2s, transform 0.2s;
+                letter-spacing: 0.3px;
+                white-space: nowrap;
+            }
+            .btn-spotify-link:hover { background: #17a349; transform: scale(1.04); }
+            .tracks-empty-msg {
+                text-align: center;
+                padding: 32px 0;
+                color: #475569;
+                font-size: 13px;
+            }
+            /* responsive table for mobile */
+            @media (max-width: 576px) {
+                .album-tracks-table tbody td {
+                    padding: 8px 4px;
+                    font-size: 12px;
+                }
+                .btn-spotify-link {
+                    padding: 4px 8px;
+                    font-size: 10px;
+                }
+                .btn-spotify-link svg {
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+        </style>
 
+        <div class="container">
+            <div class="section-heading text-center">
+                <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE (6).png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
+            </div>
+
+            @if(isset($albums) && $albums->count() > 0)
+                {{-- Album Slider --}}
+                <div class="album-slider mt-40">
+                    @foreach($albums as $album)
+                        <div class="px-12" data-aos="fade-up" data-aos-duration="200">
+                            <div class="album-card"
+                                 data-album-name="{{ $album->name }}"
+                                 data-album-desc="{{ $album->description ?? '' }}"
+                                 data-album-cover="{{ $album->cover_path ? asset('storage/' . $album->cover_path) : '' }}"
+                                 data-album-tracks="{{ $album->tracks }}">
+
+                                @if($album->cover_path)
+                                    <img src="{{ asset('storage/' . $album->cover_path) }}"
+                                         alt="{{ $album->name }}"
+                                         class="album-card__cover">
+                                @else
+                                    <div class="album-card__no-cover">
+                                        <i class="ph-bold ph-music-notes" style="font-size: 52px; color: #374151;"></i>
+                                    </div>
+                                @endif
+
+                                <i class="ph-bold ph-play-circle album-card__play-icon"></i>
+
+                                <div class="album-card__overlay">
+                                    <div class="album-card__name">{{ $album->name }}</div>
+                                    <div class="album-card__count">{{ $album->tracks->count() }} lagu</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Navigation arrows --}}
+                <div class="flex-center gap-16 mt-40">
+                    <button type="button" id="album-prev"
+                        class="slick-prev slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    <button type="button" id="album-next"
+                        class="slick-next slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                </div>
+            @endif
+        </div>
+
+        {{-- ===== Album Detail Popup ===== --}}
+        <div id="albumDetailPopup" class="mfp-hide album-popup-container" style="max-width: 800px; margin: 40px auto; position: relative;">
+            <div class="modal-content" style="background-color: #111111; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; color: #ffffff;">
+                <div class="modal-header position-relative" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding: 24px 24px 20px;">
+                    <div class="d-flex align-items-start gap-10 w-100 me-4">
+                        <img id="modal-album-cover" src="" alt="" class="album-modal-cover" style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+                        <div class="text-start">
+                            <p style="font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; font-family: 'Open Sans', sans-serif;">Album</p>
+                            <h1 class="album-modal-title mb-2" id="albumDetailModalLabel" style="font-size: 28px; font-weight: 800; color: #ffffff; line-height: 1.2;">—</h1>
+                            <p class="album-modal-desc mb-2" id="modal-album-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;"></p>
+                            <span class="album-modal-badge" id="modal-album-count"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" style="padding: 0 24px 24px;">
+                    <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
+                        <table class="album-tracks-table">
+                            <thead>
+                                <tr>
+                                    <th class="t-num">#</th>
+                                    <th>Judul Lagu</th>
+                                    <th>Artist</th>
+                                    <th style="text-align:center; padding-right:12px;">Spotify</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-tracks-body">
+                                <tr><td colspan="4" class="tracks-empty-msg">Memuat...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #albumDetailPopup .mfp-close {
+                    color: #ffffff !important;
+                    font-size: 32px;
+                    opacity: 0.7;
+                    top: 10px;
+                    right: 10px;
+                }
+                #albumDetailPopup .mfp-close:hover {
+                    opacity: 1;
+                }
+            </style>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                if ($('.album-slider').length > 0) {
+                    $('.album-slider').slick({
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        autoplay: false,
+                        speed: 900,
+                        dots: false,
+                        infinite: true,
+                        arrows: true,
+                        draggable: true,
+                        nextArrow: '#album-next',
+                        prevArrow: '#album-prev',
+                        responsive: [
+                            { breakpoint: 1200, settings: { slidesToShow: 3, arrows: false } },
+                            { breakpoint: 992,  settings: { slidesToShow: 2, arrows: false } },
+                            { breakpoint: 576,  settings: { slidesToShow: 1, arrows: false } }
+                        ]
+                    });
+                }
+
+                $('.album-card').on('click', function(e) {
+                    e.preventDefault();
+                    var card   = $(this);
+                    var name   = card.data('album-name')  || '—';
+                    var desc   = card.data('album-desc')  || '';
+                    var cover  = card.data('album-cover') || '';
+                    var tracksRaw = card.data('album-tracks');
+                    var tracks = [];
+                    if (typeof tracksRaw === 'string') {
+                        try {
+                            tracks = JSON.parse(tracksRaw);
+                        } catch(err) {}
+                    } else if (Array.isArray(tracksRaw)) {
+                        tracks = tracksRaw;
+                    }
+
+                    if (cover) {
+                        $('#modal-album-cover').attr('src', cover).attr('alt', name).show();
+                    } else {
+                        $('#modal-album-cover').hide();
+                    }
+                    $('#albumDetailModalLabel').text(name);
+                    $('#modal-album-desc').text(desc);
+                    $('#modal-album-count').text(tracks.length + ' lagu');
+
+                    var tbody = $('#modal-tracks-body');
+                    tbody.empty();
+
+                    if (!tracks || tracks.length === 0) {
+                        tbody.append('<tr><td colspan="4" class="tracks-empty-msg">Belum ada lagu dalam album ini.</td></tr>');
+                    } else {
+                        $.each(tracks, function (i, track) {
+                            var artistCell = track.artist
+                                ? '<span class="t-artist">' + track.artist + '</span>'
+                                : '<span style="color:#475569">—</span>';
+
+                            var spotifyBtn = track.spotify_url
+                                ? '<a href="' + track.spotify_url + '" target="_blank" rel="noopener" class="btn-spotify-link">'
+                                  + '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 17.32c-.22.36-.7.47-1.06.25-2.9-1.77-6.55-2.17-10.85-1.19-.41.09-.82-.17-.91-.59-.09-.41.17-.82.59-.91 4.7-1.07 8.73-.6 11.98 1.38.36.22.47.7.25 1.06zm1.48-3.3c-.28.45-.87.59-1.32.31C14.78 12.32 10.68 11.8 7 12.9c-.5.15-1.02-.13-1.17-.63-.15-.5.13-1.02.63-1.17C10.84 9.93 15.35 10.5 18.72 12.7c.45.28.59.87.32 1.32zm.13-3.43c-3.46-2.06-9.17-2.25-12.47-1.24-.53.16-1.09-.14-1.25-.67-.16-.53.14-1.09.67-1.25 3.79-1.15 10.09-.93 14.07 1.44.48.28.64.9.35 1.38-.28.48-.9.64-1.37.34z"/></svg>'
+                                  + ' Dengarkan</a>'
+                                : '<span style="color:#475569;font-size:12px">—</span>';
+
+                            tbody.append(
+                                '<tr>'
+                                + '<td class="t-num">' + (i + 1) + '</td>'
+                                + '<td class="t-title">' + track.title + '</td>'
+                                + '<td>' + artistCell + '</td>'
+                                + '<td class="t-link">' + spotifyBtn + '</td>'
+                                + '</tr>'
+                            );
+                        });
+                    }
+                    
+                    $.magnificPopup.open({
+                        items: {
+                            src: '#albumDetailPopup'
+                        },
+                        type: 'inline',
+                        mainClass: 'mfp-fade',
+                        removalDelay: 160,
+                        closeBtnInside: true
+                    });
+                });
+            });
+        </script>
+    </section>
     <!-- ================================= testimonials Section Start ========================================= -->
     <section id="events" class="py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/event.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <style>

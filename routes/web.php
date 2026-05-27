@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SongController;
+use App\Http\Controllers\Admin\SpotifyController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/songs/{id}', [SongController::class, 'update'])->name('songs.update');
     Route::delete('/songs/{id}', [SongController::class, 'destroy'])->name('songs.destroy');
     Route::post('/songs/{id}/toggle', [SongController::class, 'toggleActive'])->name('songs.toggle');
+
+    // spotify
+    Route::get('/spotify', [SpotifyController::class, 'index'])->name('spotify.index');
+    Route::get('/spotify/fetch-track-info', [SpotifyController::class, 'fetchTrackInfo'])->name('spotify.fetch.track.info');
+    Route::post('/spotify/albums', [SpotifyController::class, 'storeAlbum'])->name('spotify.album.store');
+    Route::put('/spotify/albums/{id}', [SpotifyController::class, 'updateAlbum'])->name('spotify.album.update');
+    Route::delete('/spotify/albums/{id}', [SpotifyController::class, 'destroyAlbum'])->name('spotify.album.destroy');
+    Route::post('/spotify/tracks', [SpotifyController::class, 'storeTrack'])->name('spotify.track.store');
+    Route::put('/spotify/tracks/{id}', [SpotifyController::class, 'updateTrack'])->name('spotify.track.update');
+    Route::delete('/spotify/tracks/{id}', [SpotifyController::class, 'destroyTrack'])->name('spotify.track.destroy');
 
     // events
     Route::get('/events', [EventController::class, 'index'])->name('events.index');

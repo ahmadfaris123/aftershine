@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -13,11 +13,42 @@ class EventController extends Controller
     /**
      * Menampilkan halaman index dengan list events
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Event::ordered();
+
+        if ($request->has('month') || $request->has('year')) {
+            $month = $request->month;
+            $year = $request->year;
+        } else {
+            $month = date('n');
+            $year = date('Y');
+        }
+
+        if ($month) {
+            $query->whereMonth('date', $month);
+        }
+        if ($year) {
+            $query->whereYear('date', $year);
+        }
+
+        $years = Event::selectRaw('YEAR(date) as year')
+            ->whereNotNull('date')
+            ->distinct()
+            ->orderBy('year')
+            ->pluck('year');
+
+        if (!$years->contains(date('Y'))) {
+            $years->push(date('Y'));
+            $years = $years->sort();
+        }
+
         $data = [
             'title' => 'Events',
-            'events' => Event::ordered()->get()
+            'events' => $query->get(),
+            'years' => $years,
+            'selectedMonth' => $month,
+            'selectedYear' => $year,
         ];
 
         return view('admin.events.index', $data);
@@ -36,7 +67,7 @@ class EventController extends Controller
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
             // 'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ], [
             'name.required' => 'Nama event wajib diisi',
             'date.required' => 'Tanggal event wajib diisi',
@@ -49,7 +80,7 @@ class EventController extends Controller
 
         try {
             $path = null;
-            
+
             // Upload dan simpan gambar
             // if ($request->hasFile('image')) {
             //     $image = $request->file('image');
@@ -69,13 +100,13 @@ class EventController extends Controller
                 // 'image_path' => $path,
                 'description' => $validated['description'] ?? null,
                 // 'display_order' => $validated['display_order'] ?? 0,
-                'is_active' => $validated['is_active'] ?? true
+                'is_active' => $validated['is_active'] ?? true,
             ]);
 
             return redirect()->back()->with('success', 'Event berhasil ditambahkan');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: '.$e->getMessage());
         }
     }
 
@@ -94,7 +125,7 @@ class EventController extends Controller
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'description' => 'nullable|string',
             // 'display_order' => 'nullable|integer',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ], [
             'name.required' => 'Nama event wajib diisi',
             'date.required' => 'Tanggal event wajib diisi',
@@ -127,7 +158,7 @@ class EventController extends Controller
             return redirect()->back()->with('success', 'Event berhasil diupdate');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: '.$e->getMessage());
         }
     }
 
@@ -150,7 +181,7 @@ class EventController extends Controller
             return redirect()->back()->with('success', 'Event berhasil dihapus');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: '.$e->getMessage());
         }
     }
 
@@ -161,13 +192,13 @@ class EventController extends Controller
     {
         try {
             $event = Event::findOrFail($id);
-            $event->is_active = !$event->is_active;
+            $event->is_active = ! $event->is_active;
             $event->save();
 
             return redirect()->back()->with('success', 'Status event berhasil diubah');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: '.$e->getMessage());
         }
     }
 }

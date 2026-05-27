@@ -160,6 +160,47 @@
             </div>
         </div>
 
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-3 mt-3">
+                        <h6 class="text-md text-primary-light mb-0">Filter Data</h6>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <select name="month" id="month" class="form-select">
+                                    <option value="">Semua Bulan</option>
+                                    <option value="1" {{ $selectedMonth == 1 ? 'selected' : '' }}>Januari</option>
+                                    <option value="2" {{ $selectedMonth == 2 ? 'selected' : '' }}>Februari</option>
+                                    <option value="3" {{ $selectedMonth == 3 ? 'selected' : '' }}>Maret</option>
+                                    <option value="4" {{ $selectedMonth == 4 ? 'selected' : '' }}>April</option>
+                                    <option value="5" {{ $selectedMonth == 5 ? 'selected' : '' }}>Mei</option>
+                                    <option value="6" {{ $selectedMonth == 6 ? 'selected' : '' }}>Juni</option>
+                                    <option value="7" {{ $selectedMonth == 7 ? 'selected' : '' }}>Juli</option>
+                                    <option value="8" {{ $selectedMonth == 8 ? 'selected' : '' }}>Agustus</option>
+                                    <option value="9" {{ $selectedMonth == 9 ? 'selected' : '' }}>September</option>
+                                    <option value="10" {{ $selectedMonth == 10 ? 'selected' : '' }}>Oktober</option>
+                                    <option value="11" {{ $selectedMonth == 11 ? 'selected' : '' }}>November</option>
+                                    <option value="12" {{ $selectedMonth == 12 ? 'selected' : '' }}>Desember</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <select name="year" id="year" class="form-select">
+                                    <option value="">Semua Tahun</option>
+                                    @foreach ($years as $year)
+                                        <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- List Events --}}
         @if($events && $events->count() > 0)
             <div class="col-12">
@@ -389,6 +430,39 @@
             collapseUploadForm.addEventListener('hide.bs.collapse', event => {
                 uploadFormIcon.setAttribute('icon', 'mdi:chevron-down');
             });
+        }
+
+        // Filter handler
+        const monthSelect = document.getElementById('month');
+        const yearSelect = document.getElementById('year');
+
+        function applyFilter() {
+            const month = monthSelect.value;
+            const year = yearSelect.value;
+            
+            let url = new URL(window.location.href);
+            
+            if (month) {
+                url.searchParams.set('month', month);
+            } else {
+                url.searchParams.delete('month');
+            }
+            
+            if (year) {
+                url.searchParams.set('year', year);
+            } else {
+                url.searchParams.delete('year');
+            }
+            
+            window.location.href = url.toString();
+        }
+
+        if (monthSelect) {
+            monthSelect.addEventListener('change', applyFilter);
+        }
+
+        if (yearSelect) {
+            yearSelect.addEventListener('change', applyFilter);
         }
     </script>
 @endpush

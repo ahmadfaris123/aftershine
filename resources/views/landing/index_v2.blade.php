@@ -118,6 +118,9 @@
                 <a class="nav-link text-white transition-1" href="#music">Originals</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link text-white transition-1" href="#albums">Albums</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link text-white transition-1" href="#events">Events</a>
               </li>
               <li class="nav-item">

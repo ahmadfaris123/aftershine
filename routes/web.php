@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SongController;
+use App\Http\Controllers\Admin\MerchantController;
 use App\Http\Controllers\Admin\SpotifyController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LandingController;
@@ -81,6 +82,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/award/{id}', [AwardController::class, 'update'])->name('award.update');
     Route::delete('/award/{id}', [AwardController::class, 'destroy'])->name('award.destroy');
     Route::post('/award/{id}/toggle', [AwardController::class, 'toggleActive'])->name('award.toggle');
+
+    // merchant
+    Route::get('/merchant', [MerchantController::class, 'index'])->name('merchant.index');
+    Route::post('/merchant', [MerchantController::class, 'store'])->name('merchant.store');
+    Route::put('/merchant/{id}', [MerchantController::class, 'update'])->name('merchant.update');
+    Route::delete('/merchant/{id}', [MerchantController::class, 'destroy'])->name('merchant.destroy');
+    Route::post('/merchant/{id}/toggle', [MerchantController::class, 'toggleActive'])->name('merchant.toggle');
 
     // contact
     // Route::get('/contact', [Contact::class, 'index'])->name('contact');

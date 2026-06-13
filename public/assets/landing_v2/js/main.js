@@ -1091,7 +1091,53 @@ if ($('ul').length) {
       },
     ]
   });
-  // ========================= Brand Slider Js End ===================
+  // ========================= Merchant Slider Js Start ==============
+  $('.merchant-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    speed: 900,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    infinite: true,
+    nextArrow: '#merchant-next',
+    prevArrow: '#merchant-prev',
+    responsive: [
+      {
+        breakpoint: 1299,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });
+  // ========================= Merchant Slider Js End ===================
 
   // ========================= Increment & Decrement Js Start ===================
   var minus = $('.quantity__minus');

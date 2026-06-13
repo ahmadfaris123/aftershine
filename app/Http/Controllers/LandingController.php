@@ -10,6 +10,7 @@ use App\Models\Song;
 use App\Models\Event;
 use App\Models\Award;
 use App\Models\SpotifyAlbum;
+use App\Models\Merchant;
 
 class LandingController extends Controller
 {
@@ -45,6 +46,9 @@ class LandingController extends Controller
             $q->where('is_active', true)->orderBy('display_order');
         }])->get();
 
+        // Get all active merchants ordered by display_order
+        $merchants = Merchant::active()->limit(4)->get();
+
         $data = [
             'activeBackground' => $activeBackground,
             'settings' => $settings,
@@ -53,6 +57,7 @@ class LandingController extends Controller
             'events' => $events,
             'awards' => $awards,
             'albums' => $albums,
+            'merchants' => $merchants,
         ];
 
         return view('landing.index_v2', $data);

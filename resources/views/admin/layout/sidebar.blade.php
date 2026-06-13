@@ -49,6 +49,12 @@
         </a>
       </li>
       <li>
+        <a href="{{ route('merchant.index') }}">
+          <iconify-icon icon="mdi:marketplace" class="menu-icon"></iconify-icon>
+          <span>Merchant</span>
+        </a>
+      </li>
+      <li>
         <a href="{{ route('settings.index') }}">
           <iconify-icon icon="mdi:cog" class="menu-icon"></iconify-icon>
           <span>Settings</span>

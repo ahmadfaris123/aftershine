@@ -1,4 +1,4 @@
-@php
+﻿@php
     use App\Http\Controllers\LandingController;
 @endphp
 <!DOCTYPE html>
@@ -972,7 +972,93 @@
     </section>
 
     <!-- ==================== Merchant Start Here ==================== -->
-     <section id="merchant" class="testimonials py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/awards.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+    <style>
+        .merchant-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .merchant-card:hover {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+        .merchant-card__img-wrap {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 28px 16px;
+            height: 200px;
+        }
+        .merchant-card__img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+            transition: transform 0.35s ease;
+        }
+        .merchant-card:hover .merchant-card__img-wrap img {
+            transform: scale(1.06);
+        }
+        .merchant-card__body {
+            padding: 14px 18px 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .merchant-card__name {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .merchant-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 7px 16px;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+        .merchant-card__link:hover {
+            background: rgba(255,255,255,0.25);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.45);
+            gap: 10px;
+        }
+        .merchant-card__link i {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+        .merchant-card__link:hover i {
+            transform: translateX(2px);
+        }
+        .merchant-slider .slick-slide {
+            padding: 8px 10px;
+        }
+        .merchant-slider .slick-list {
+            margin: 0 -10px;
+        }
+    </style>
+    <section id="merchant" class="testimonials py-120 position-relative z-1" style="background-image: url('{{ asset('assets/landing_v2/images/bg/awards.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="container">
 
             <div class="section-heading text-center">
@@ -980,42 +1066,37 @@
             </div>
 
             <div class="merchant-slider">
-                <div class="section-heading text-center">
-                    <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE (5).png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
-                </div>
-                <!-- @forelse($personils as $personil)
-                    <div class="px-12" data-aos="fade-up" data-aos-duration="200">
-                        <div class="overflow-hidden mb-24">
-                            <img src="{{ asset('storage/' . $personil->photo_path) }}"
-                                class="w-100" style="aspect-ratio: 1/1; object-fit: cover;">
-                        </div>
-                        <div class="text-start">
-                            <h4 class="mb-12" style="color: #ffffff; font-weight: 700;">{{ $personil->name }}</h4>
-                            <p class="mb-8" style="color: #cbd5e1; font-size: 14px;">{{ $personil->position }}</p>
-                            <p class="mb-8" style="color: #333; font-size: 14px;">{{ $personil->phone }}</p>
-                            
-                            <div class="d-flex gap-16">
-                                @if($personil->instagram_url)
-                                    <a href="{{ $personil->instagram_url }}" target="_blank" class="text-white transition-1 text-xl">
-                                        <i class="ph-bold ph-instagram-logo"></i>
-                                    </a>
+                @forelse($merchants as $merchant)
+                    <div data-aos="fade-up" data-aos-duration="200">
+                        <div class="merchant-card">
+                            <div class="merchant-card__img-wrap">
+                                @if($merchant->image_path)
+                                    <img src="{{ asset('storage/' . $merchant->image_path) }}"
+                                        alt="{{ $merchant->name }}">
+                                @else
+                                    <div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;opacity:0.3;">
+                                        <i class="ph ph-image" style="font-size:48px;color:#fff;"></i>
+                                    </div>
                                 @endif
-                                @if($personil->tiktok_url)
-                                    <a href="{{ $personil->tiktok_url }}" target="_blank" class="text-white transition-1 text-xl">
-                                        <i class="ph-bold ph-tiktok-logo"></i>
+                            </div>
+                            <div class="merchant-card__body">
+                                <p class="merchant-card__name">{{ $merchant->name }}</p>
+                                @if($merchant->link_url)
+                                    <a href="{{ $merchant->link_url }}" target="_blank" class="merchant-card__link">
+                                        Beli Sekarang <i class="ph ph-arrow-right"></i>
                                     </a>
                                 @endif
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="text-center p-5 w-100">
-                        <p>Belum ada Merchant yang ditambahkan.</p>
+                    <div class="section-heading text-center">
+                        <img src="{{ asset('assets/landing_v2/images/ASSET WEBSITE AFTERSHINE (5).png') }}" alt="Aftershine Asset" class="w-100 object-fit-cover">
                     </div>
-                @endforelse -->
+                @endforelse
             </div>
 
-            <!-- <div class="flex-center gap-16 mt-40">
+            <div class="flex-center gap-16 mt-40">
                 <button type="button" id="merchant-prev"
                     class="slick-prev slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-left"></i>
@@ -1024,9 +1105,10 @@
                     class="slick-next slick-arrow flex-center rounded-circle border border-gray-600 hover-border-main-600 text-xl hover-bg-main-600 hover-text-black transition-1 w-48 h-48 text-white">
                     <i class="ph ph-caret-right"></i>
                 </button>
-            </div> -->
+            </div>
         </div>
     </section>
+    <!-- ==================== Merchant end ==================== -->
     <!-- ==================== Merchant end ==================== -->
 
     <!-- ==================== Footer Start Here ==================== -->
